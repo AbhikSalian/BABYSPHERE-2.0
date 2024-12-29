@@ -1,95 +1,46 @@
 import { useState, useEffect } from 'react';
-import { wellnessService } from '../components/wellnessService';
-import type { WellnessLog } from '../types/wellness';
+import { wellnessService } from '../services/wellnessService';
+import type { WellnessStats } from '../types/wellness';
 
-type TimeRange = 'day' | 'week' | 'month';
-
-interface WeeklyAverages {
-  mood: number;
-  sleep: number;
-}
-
-interface TrendData {
-  mood: { x: Date; y: number }[];
-  sleep: { x: Date; y: number }[];
-}
-
-export function useWellnessData(timeRange: TimeRange = 'week') {
+export function useWellnessData(days: number = 7) {
   const [loading, setLoading] = useState(true);
-  const [weeklyAverages, setWeeklyAverages] = useState<WeeklyAverages | null>(null);
-  const [trendData, setTrendData] = useState<TrendData>({ mood: [], sleep: [] });
+  const [data, setData] = useState<WellnessStats>({
+    averages: { mood: 0, sleep: 0 },
+    trends: { mood: [], sleep: [] }
+  });
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchData = async () => {
+    let mounted = true;
+
+    async function fetchData() {
       try {
         setLoading(true);
-        const data = await wellnessService.getWellnessData(timeRange, 'current-user');
-        setWeeklyAverages({
-          mood: data.averages.mood,
-          sleep: data.averages.sleep
-        });
-        setTrendData({
-          mood: data.trends.mood.map(point => ({
-            x: new Date(point.date),
-            y: point.value
-          })),
-          sleep: data.trends.sleep.map(point => ({
-            x: new Date(point.date),
-            y: point.value
-          }))
-        });
-      } catch (error) {
-        console.error('Error fetching wellness data:', error);
+        const wellnessData = await wellnessService.getWellnessData(days);
+        if (mounted) {
+          setData(wellnessData);
+        }
+      } catch (err) {
+        if (mounted) {
+          setError(err instanceof Error ? err.message : 'Failed to fetch wellness data');
+        }
       } finally {
-        setLoading(false);
+        if (mounted) {
+          setLoading(false);
+        }
       }
-    };
-  
+    }
+
     fetchData();
-  }, [timeRange]);
-  
+
+    return () => {
+      mounted = false;
+    };
+  }, [days]);
 
   return {
     loading,
-    weeklyAverages,
-    trendData,
+    error,
+    data
   };
-}
-
-function calculateAverages(logs: WellnessLog[]): WeeklyAverages {
-  if (!logs.length) return { mood: 0, sleep: 0 };
-
-  const total = logs.reduce((acc, log) => ({
-    mood: acc.mood + getMoodValue(log.mood),
-    sleep: acc.sleep + (log.sleep?.quality || 0),
-  }), { mood: 0, sleep: 0 });
-
-  return {
-    mood: Math.round((total.mood / logs.length) * 10) / 10,
-    sleep: Math.round((total.sleep / logs.length) * 10) / 10,
-  };
-}
-
-function processTrendData(logs: WellnessLog[]): TrendData {
-  return {
-    mood: logs.map(log => ({
-      x: new Date(log.date),
-      y: getMoodValue(log.mood),
-    })),
-    sleep: logs.map(log => ({
-      x: new Date(log.date),
-      y: log.sleep?.quality || 0,
-    })),
-  };
-}
-
-function getMoodValue(mood: string): number {
-  const moodValues: Record<string, number> = {
-    happy: 5,
-    content: 4,
-    neutral: 3,
-    sad: 2,
-    stressed: 1,
-  };
-  return moodValues[mood] || 3;
 }

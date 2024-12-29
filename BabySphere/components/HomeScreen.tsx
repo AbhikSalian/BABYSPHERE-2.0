@@ -3,17 +3,27 @@ import { ScrollView, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { MoodPicker } from '../components/MoodPicker';
 import { SleepQuality } from '../components/SleepQuality';
-import { theme } from '../utils/theme';
-import type { MoodType } from '../types/wellness';
-import { JournalEntry } from '../components/journal/JournalEntry';
 import { WellnessInsights } from '../components/insights/WellnessInsights';
-import { WellnessTrends } from '../components/trends/WellnessTrends';
-import { WellnessTips } from '../components/tips/WellnessTips';
-
+import { useWellnessLog } from '../hooks/useWellnessLog';
+import { theme } from '../utils/theme';
+import { JournalEntry } from './journal/JournalEntry';
+import type { MoodType } from '../types/wellness';
+import { WellnessTips } from './tips/WellnessTips';
+import { WellnessTrends } from './trends/WellnessTrends';
 
 export default function HomeScreen() {
   const [selectedMood, setSelectedMood] = useState<MoodType>();
   const [sleepQuality, setSleepQuality] = useState(5);
+  const { saveMoodAndSleep, isLoading } = useWellnessLog();
+
+  const handleSave = async () => {
+    if (selectedMood) {
+      await saveMoodAndSleep(selectedMood, sleepQuality);
+      // Reset form after successful save
+      setSelectedMood(undefined);
+      setSleepQuality(5);
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -21,15 +31,17 @@ export default function HomeScreen() {
         <MoodPicker
           onMoodSelect={setSelectedMood}
           selectedMood={selectedMood}
+          onSave={handleSave}
+          isLoading={isLoading}
         />
         <SleepQuality
           onQualityChange={setSleepQuality}
           quality={sleepQuality}
         />
         <JournalEntry />
-        <WellnessInsights />
         <WellnessTrends />
         <WellnessTips />
+        <WellnessInsights />
 
       </ScrollView>
     </SafeAreaView>
@@ -43,5 +55,6 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     flex: 1,
+    padding: 16,
   },
 });

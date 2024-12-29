@@ -1,38 +1,32 @@
-export type TimeRange = 'day' | 'week' | 'month';
+export type MoodType = 'happy' | 'sad' | 'tired' | 'stressed';
+
+export interface SleepData {
+  quality: number;
+  duration?: number;
+}
 
 export interface WellnessLog {
   id: string;
   date: string;
+  mood: MoodType;
+  sleep?: SleepData;
   userId: string;
-  mood: string;
-  energyLevel?: number;
-  stressLevel?: number;
-  sleep?: {
-    quality: number;
-    duration?: number;
-  };
-  notes?: string;
 }
 
-export interface ProcessedWellnessData {
+export interface WellnessStats {
   averages: {
     mood: number;
     sleep: number;
-    energy: number;
-    stress: number;
   };
   trends: {
     mood: TrendPoint[];
     sleep: TrendPoint[];
-    energy: TrendPoint[];
-  };
-  summary: {
-    insights: string[];
-    recommendations: string[];
   };
 }
 
-interface TrendPoint {
+export interface TrendPoint {
   date: string;
   value: number;
 }
+
+export type TimeRange = 'day' | 'week' | 'month';

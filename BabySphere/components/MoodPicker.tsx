@@ -6,20 +6,21 @@ import type { MoodType } from '../types/wellness';
 interface MoodPickerProps {
   onMoodSelect: (mood: MoodType) => void;
   selectedMood?: MoodType;
+  onSave: () => void;
+  isLoading: boolean;
 }
 
-export function MoodPicker({ onMoodSelect, selectedMood }: MoodPickerProps) {
+export function MoodPicker({ onMoodSelect, selectedMood, onSave, isLoading }: MoodPickerProps) {
   const moods: { type: MoodType; emoji: string; label: string }[] = [
     { type: 'happy', emoji: '😊', label: 'Happy' },
-    { type: 'content', emoji: '😌', label: 'Content' },
-    { type: 'neutral', emoji: '😐', label: 'Neutral' },
     { type: 'sad', emoji: '😔', label: 'Sad' },
+    { type: 'tired', emoji: '😫', label: 'Tired' },
     { type: 'stressed', emoji: '😫', label: 'Stressed' },
   ];
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>How are you feeling today?</Text>
+      <Text style={styles.title}>How are you feeling?</Text>
       <View style={styles.moodGrid}>
         {moods.map(({ type, emoji, label }) => (
           <TouchableOpacity
@@ -35,6 +36,15 @@ export function MoodPicker({ onMoodSelect, selectedMood }: MoodPickerProps) {
           </TouchableOpacity>
         ))}
       </View>
+      <TouchableOpacity
+        style={[styles.saveButton, (!selectedMood || isLoading) && styles.saveButtonDisabled]}
+        onPress={onSave}
+        disabled={!selectedMood || isLoading}
+      >
+        <Text style={styles.saveButtonText}>
+          {isLoading ? 'Saving...' : 'Save Mood'}
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -42,6 +52,9 @@ export function MoodPicker({ onMoodSelect, selectedMood }: MoodPickerProps) {
 const styles = StyleSheet.create({
   container: {
     padding: 16,
+    backgroundColor: theme.colors.card,
+    borderRadius: 12,
+    marginBottom: 16,
   },
   title: {
     fontSize: 18,
@@ -53,28 +66,41 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     gap: 12,
-    justifyContent: 'space-between',
+    marginBottom: 16,
   },
   moodButton: {
-    width: '18%',
+    flex: 1,
+    minWidth: '45%',
     aspectRatio: 1,
-    backgroundColor: theme.colors.card,
+    backgroundColor: theme.colors.background,
     borderRadius: 12,
-    padding: 8,
+    padding: 12,
     alignItems: 'center',
     justifyContent: 'center',
-    ...theme.shadows.card,
   },
   selectedMood: {
     backgroundColor: theme.colors.primary,
   },
   emoji: {
-    fontSize: 24,
-    marginBottom: 4,
+    fontSize: 32,
+    marginBottom: 8,
   },
   label: {
-    fontSize: 12,
+    fontSize: 14,
     color: theme.colors.text,
-    textAlign: 'center',
+  },
+  saveButton: {
+    backgroundColor: theme.colors.primary,
+    padding: 16,
+    borderRadius: 12,
+    alignItems: 'center',
+  },
+  saveButtonDisabled: {
+    opacity: 0.5,
+  },
+  saveButtonText: {
+    color: '#FFFFFF',
+    fontWeight: '600',
+    fontSize: 16,
   },
 });

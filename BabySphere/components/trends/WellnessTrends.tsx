@@ -5,12 +5,17 @@ import { FilterButtons } from './FilterButtons';
 import { LineChart } from '../charts/LineChart';
 import { useWellnessData } from '../../hooks/useWellnessData';
 import { theme } from '../../utils/theme';
+import type { TimeRange } from '../../types/wellness';
 
-type TimeRange = 'day' | 'week' | 'month';
+const TIME_RANGE_DAYS: Record<TimeRange, number> = {
+  day: 1,
+  week: 7,
+  month: 30
+};
 
 export function WellnessTrends() {
   const [timeRange, setTimeRange] = useState<TimeRange>('week');
-  const { trendData, loading } = useWellnessData(timeRange);
+  const { loading, error, data } = useWellnessData(TIME_RANGE_DAYS[timeRange]);
 
   if (loading) {
     return (
@@ -19,6 +24,22 @@ export function WellnessTrends() {
       </Card>
     );
   }
+
+  if (error) {
+    return (
+      <Card>
+        <Text style={styles.title}>Error loading trends</Text>
+        <Text style={styles.error}>{error}</Text>
+      </Card>
+    );
+  }
+
+  const transformTrendData = (trendPoints: { date: string; value: number }[]) => {
+    return trendPoints.map(point => ({
+      x: new Date(point.date),
+      y: point.value
+    }));
+  };
 
   return (
     <Card>
@@ -29,7 +50,6 @@ export function WellnessTrends() {
       />
       
       <View style={styles.chartContainer}>
-        {/* Legend */}
         <View style={styles.legend}>
           <View style={styles.legendItem}>
             <View style={[styles.legendDot, { backgroundColor: theme.colors.primary }]} />
@@ -41,13 +61,12 @@ export function WellnessTrends() {
           </View>
         </View>
 
-        {/* Charts */}
         <LineChart
-          data={trendData.mood}
+          data={transformTrendData(data.trends.mood)}
           color={theme.colors.primary}
         />
         <LineChart
-          data={trendData.sleep}
+          data={transformTrendData(data.trends.sleep)}
           color={theme.colors.secondary}
         />
       </View>
@@ -65,6 +84,10 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: theme.colors.text,
     marginBottom: 16,
+  },
+  error: {
+    color: theme.colors.error,
+    fontSize: 14,
   },
   chartContainer: {
     marginTop: 16,
