@@ -6,7 +6,8 @@ export function useWellnessData(days: number = 7) {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState<WellnessStats>({
     averages: { mood: 0, sleep: 0 },
-    trends: { mood: [], sleep: [] }
+    trends: { mood: [], sleep: [] },
+    insights: [], // Added default empty array for insights
   });
   const [error, setError] = useState<string | null>(null);
 
@@ -41,6 +42,6 @@ export function useWellnessData(days: number = 7) {
   return {
     loading,
     error,
-    data
+    data,
   };
 }

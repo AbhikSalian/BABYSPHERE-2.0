@@ -7,14 +7,23 @@ import { WellnessInsights } from '../components/insights/WellnessInsights';
 import { useWellnessLog } from '../hooks/useWellnessLog';
 import { theme } from '../utils/theme';
 import { JournalEntry } from './journal/JournalEntry';
-import type { MoodType } from '../types/wellness';
 import { WellnessTips } from './tips/WellnessTips';
 import { WellnessTrends } from './trends/WellnessTrends';
+import { TrendChart } from '../components/trends/TrendChart';
+import { InsightPreferencesModal } from '../components/preferences/InsightPreferencesModal';
+import { usePreferences } from '../hooks/usePreferences';
+import type { MoodType } from '../types/wellness';
 
-export default function HomeScreen() {
+export default function IntegratedWellnessScreen() {
   const [selectedMood, setSelectedMood] = useState<MoodType>();
   const [sleepQuality, setSleepQuality] = useState(5);
   const { saveMoodAndSleep, isLoading } = useWellnessLog();
+  const {
+    insightPreferences,
+    chartPreferences,
+    saveInsightPreferences,
+    saveChartPreferences,
+  } = usePreferences();
 
   const handleSave = async () => {
     if (selectedMood) {
@@ -42,7 +51,14 @@ export default function HomeScreen() {
         <WellnessTrends />
         <WellnessTips />
         <WellnessInsights />
-
+        <TrendChart
+          data={[] /* Replace with actual wellness data */}
+          preferences={chartPreferences}
+        />
+        <InsightPreferencesModal
+          preferences={insightPreferences}
+          onPreferencesChange={saveInsightPreferences}
+        />
       </ScrollView>
     </SafeAreaView>
   );

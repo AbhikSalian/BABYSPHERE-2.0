@@ -1,71 +1,74 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { Card } from '../ui/Card';
-import { InsightCard } from './InsightCard';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { WellnessInsightCard } from './WellnessInsightCard';
 import { useWellnessData } from '../../hooks/useWellnessData';
 import { theme } from '../../utils/theme';
 
 export function WellnessInsights() {
-  const { weeklyAverages, loading } = useWellnessData();
-
-  const insights = [
-    {
-      title: `Avg. Mood: ${weeklyAverages?.mood || 'N/A'}`,
-      icon: '😊',
-      color: theme.colors.yellow,
-    },
-    {
-      title: `Sleep: ${weeklyAverages?.sleep || 'N/A'}/10`,
-      icon: '😴',
-      color: theme.colors.blue,
-    },
-    {
-      title: 'Take a Break',
-      icon: '🧘‍♀️',
-      color: theme.colors.green,
-    },
-    {
-      title: 'Stay Hydrated',
-      icon: '💧',
-      color: theme.colors.pink,
-    },
-  ];
+  const { loading, error, data } = useWellnessData();
 
   if (loading) {
     return (
-      <Card>
-        <Text style={styles.title}>Loading insights...</Text>
-      </Card>
+      <View style={styles.container}>
+        <Text style={styles.loading}>Loading insights...</Text>
+      </View>
+    );
+  }
+
+  if (error) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.error}>{error}</Text>
+      </View>
+    );
+  }
+
+  if (data.insights.length === 0) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.empty}>No insights available.</Text>
+      </View>
     );
   }
 
   return (
-    <Card>
-      <Text style={styles.title}>Your Wellness Insights</Text>
-      <View style={styles.grid}>
-        {insights.map((insight, index) => (
-          <InsightCard
-            key={index}
-            title={insight.title}
-            icon={insight.icon}
-            color={insight.color}
-          />
-        ))}
-      </View>
-    </Card>
+    <ScrollView
+      horizontal
+      showsHorizontalScrollIndicator={false}
+      contentContainerStyle={styles.scrollContent}
+    >
+      {data.insights.map((insight, index) => (
+        <View key={insight.id} style={styles.cardContainer}>
+          <WellnessInsightCard insight={insight} />
+        </View>
+      ))}
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  title: {
-    fontSize: 18,
-    fontWeight: '600',
-    color: theme.colors.text,
-    marginBottom: 16,
+  container: {
+    padding: 16,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  grid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+  scrollContent: {
+    padding: 16,
     gap: 12,
+  },
+  cardContainer: {
+    width: 300,
+  },
+  loading: {
+    color: theme.colors.textSecondary,
+    textAlign: 'center',
+  },
+  error: {
+    color: theme.colors.error,
+    textAlign: 'center',
+  },
+  empty: {
+    color: theme.colors.textSecondary,
+    textAlign: 'center',
   },
 });

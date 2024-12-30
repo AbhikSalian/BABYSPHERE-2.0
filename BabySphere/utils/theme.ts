@@ -12,6 +12,7 @@ export const theme = {
     blue: '#B5DEFF',
     green: '#98E2C6',
     error: '#B00020',
+    success: '#767676',
   },
   shadows: {
     card: {
