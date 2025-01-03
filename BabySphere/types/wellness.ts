@@ -38,3 +38,5 @@ export interface WellnessPattern {
   description: string;
 }
 
+export type TimeRange = 'day' | 'week' | 'month';
+

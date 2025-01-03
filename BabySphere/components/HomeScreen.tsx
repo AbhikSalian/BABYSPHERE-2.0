@@ -6,10 +6,10 @@ import { SleepQuality } from '../components/SleepQuality';
 import { WellnessInsights } from '../components/insights/WellnessInsights';
 import { useWellnessLog } from '../hooks/useWellnessLog';
 import { theme } from '../utils/theme';
-import { JournalEntry } from './journal/JournalEntry';
+
 import { WellnessTips } from './tips/WellnessTips';
 import { WellnessTrends } from './trends/WellnessTrends';
-import { TrendChart } from '../components/trends/TrendChart';
+
 
 import { usePreferences } from '../hooks/usePreferences';
 import type { MoodType } from '../types/wellness';
@@ -47,14 +47,11 @@ export default function IntegratedWellnessScreen() {
           onQualityChange={setSleepQuality}
           quality={sleepQuality}
         />
-        <JournalEntry />
+        
         <WellnessTrends />
         <WellnessTips />
         <WellnessInsights />
-        <TrendChart
-          data={[] /* Replace with actual wellness data */}
-          preferences={chartPreferences}
-        />
+       
     
       </ScrollView>
     </SafeAreaView>

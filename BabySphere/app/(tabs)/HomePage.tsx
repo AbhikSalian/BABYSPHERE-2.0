@@ -43,7 +43,8 @@ const HomePage: React.FC = () => {
 
   return (
     <SafeAreaView style={[styles.container, isDarkMode && styles.darkContainer]}>
-      <NewHeader />
+      <NewHeader isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
+      
       <ScrollView
         contentContainerStyle={styles.scrollContent}
         refreshControl={
@@ -72,12 +73,7 @@ const HomePage: React.FC = () => {
             <Ionicons name="notifications" size={24} color="#8AA9B8" />
             <Text style={styles.alertButtonText}>View Alerts</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.darkModeButton} onPress={toggleDarkMode}>
-            <Ionicons name={isDarkMode ? "sunny" : "moon"} size={24} color="#8AA9B8" />
-            <Text style={styles.darkModeButtonText}>
-              {isDarkMode ? "Light Mode" : "Dark Mode"}
-            </Text>
-          </TouchableOpacity>
+          
         </View>
       </ScrollView>
 
