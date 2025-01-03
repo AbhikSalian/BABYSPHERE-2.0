@@ -24,27 +24,43 @@ Reports/Design Phase/GA6_design_phase.toc
 Reports/Design Phase/GA6_design_phase.run.xml
 Reports/Design Phase/GA6_design_phase.synctex.gz
 
+Reports/Final Report/GA6_Final_Report.aux
+Reports/Final Report/GA6_Final_Report.fdb_latexmk
+Reports/Final Report/GA6_Final_Report.fls
+Reports/Final Report/GA6_Final_Report.log
+Reports/Final Report/GA6_Final_Report.bbl
+Reports/Final Report/GA6_Final_Report.bbl-SAVE-ERROR
+Reports/Final Report/GA6_Final_Report.bcf
+Reports/Final Report/GA6_Final_Report.blg
+Reports/Final Report/GA6_Final_Report.lof
+Reports/Final Report/GA6_Final_Report.lot
+Reports/Final Report/GA6_Final_Report.toc
+Reports/Final Report/GA6_Final_Report.run.xml
+Reports/Final Report/GA6_Final_Report.synctex.gz
 
-Reports/IASF_2025/iasf_report.aux
-Reports/IASF_2025/iasf_report.fdb_latexmk
-Reports/IASF_2025/iasf_report.fls
-Reports/IASF_2025/iasf_report.log
-Reports/IASF_2025/iasf_report.bbl
-Reports/IASF_2025/iasf_report.bbl-SAVE-ERROR
-Reports/IASF_2025/iasf_report.bcf
-Reports/IASF_2025/iasf_report.blg
-Reports/IASF_2025/iasf_report.lof
-Reports/IASF_2025/iasf_report.lot
-Reports/IASF_2025/iasf_report.toc
-Reports/IASF_2025/iasf_report.run.xml
-Reports/IASF_2025/iasf_report.synctex.gz
+Reports/Final Report Updated/GA6_Final_Updated.aux
+Reports/Final Report Updated/GA6_Final_Updated.fdb_latexmk
+Reports/Final Report Updated/GA6_Final_Updated.fls
+Reports/Final Report Updated/GA6_Final_Updated.log
+Reports/Final Report Updated/GA6_Final_Updated.bbl
+Reports/Final Report Updated/GA6_Final_Updated.bbl-SAVE-ERROR
+Reports/Final Report Updated/GA6_Final_Updated.bcf
+Reports/Final Report Updated/GA6_Final_Updated.blg
+Reports/Final Report Updated/GA6_Final_Updated.lof
+Reports/Final Report Updated/GA6_Final_Updated.lot
+Reports/Final Report Updated/GA6_Final_Updated.toc
+Reports/Final Report Updated/GA6_Final_Updated.run.xml
+Reports/Final Report Updated/GA6_Final_Updated.synctex.gz
+
 
 
 frontend/BABYSPHERE/node_modules
 node_modules
 BabySphere/node_modules
+BabySphere/expo-env.d.ts
 
 .expo/
+
 
 
 Reports/IASF_2025/iasf_report.aux

@@ -97,7 +97,6 @@ const styles = StyleSheet.create({
 
 <<<<<<< HEAD
 export default LiveFeed;
-
 =======
 export default LiveFeed;
 >>>>>>> 3e036ded72285d2b231dce8fb1bfcf81ee702410

@@ -13,12 +13,7 @@
     "preset": "jest-expo"
   },
   "dependencies": {
-<<<<<<< HEAD
-    "@expo/vector-icons": "^14.0.2",
-    "@react-native-async-storage/async-storage": "^1.24.0",
-=======
     "@expo/vector-icons": "^14.0.4",
->>>>>>> 3e036ded72285d2b231dce8fb1bfcf81ee702410
     "@react-native-community/datetimepicker": "^8.2.0",
     "@react-native-community/masked-view": "^0.1.11",
     "@react-native-firebase/app": "^21.5.0",
