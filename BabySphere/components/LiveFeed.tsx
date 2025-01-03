@@ -13,7 +13,11 @@ const LiveFeed: React.FC = () => {
 
   const latestData = sensorData.length > 0 ? sensorData[sensorData.length - 1] : null;
 
+<<<<<<< HEAD
   const cameraFeedUri = "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8";
+=======
+  const cameraFeedUri = "http://192.168.40.162:5002/processed_feed"; // Replace with your live stream URL
+>>>>>>> 3e036ded72285d2b231dce8fb1bfcf81ee702410
 
   return (
     <SafeAreaView style={styles.container}>
@@ -29,7 +33,28 @@ const LiveFeed: React.FC = () => {
           <View style={styles.redDot} />
         </View>
       </View>
+<<<<<<< HEAD
       <VideoPlayer uri={cameraFeedUri} />
+=======
+
+      {/* Live Stream Component */}
+      {Platform.OS === 'web' ? (
+        <iframe 
+          src={cameraFeedUri} 
+          style={styles.iframe} 
+          title="Live Stream" 
+        />
+      ) : (
+        <View style={styles.webViewContainer}>
+          <WebView 
+            source={{ uri: cameraFeedUri }} 
+            style={styles.webView} 
+            onError={() => setError("")}
+          />
+        </View>
+      )}
+
+>>>>>>> 3e036ded72285d2b231dce8fb1bfcf81ee702410
       <LiveParameters latestData={latestData} />
       {isLoading && <Text>Loading...</Text>}
       {error && <Text style={styles.errorText}>{error}</Text>}
@@ -70,5 +95,9 @@ const styles = StyleSheet.create({
   },
 });
 
+<<<<<<< HEAD
 export default LiveFeed;
 
+=======
+export default LiveFeed;
+>>>>>>> 3e036ded72285d2b231dce8fb1bfcf81ee702410

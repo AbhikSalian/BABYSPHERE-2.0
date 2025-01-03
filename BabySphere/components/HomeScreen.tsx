@@ -10,7 +10,7 @@ import { JournalEntry } from './journal/JournalEntry';
 import { WellnessTips } from './tips/WellnessTips';
 import { WellnessTrends } from './trends/WellnessTrends';
 import { TrendChart } from '../components/trends/TrendChart';
-import { InsightPreferencesModal } from '../components/preferences/InsightPreferencesModal';
+
 import { usePreferences } from '../hooks/usePreferences';
 import type { MoodType } from '../types/wellness';
 
@@ -55,10 +55,7 @@ export default function IntegratedWellnessScreen() {
           data={[] /* Replace with actual wellness data */}
           preferences={chartPreferences}
         />
-        <InsightPreferencesModal
-          preferences={insightPreferences}
-          onPreferencesChange={saveInsightPreferences}
-        />
+    
       </ScrollView>
     </SafeAreaView>
   );
