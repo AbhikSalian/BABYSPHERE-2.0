@@ -15,6 +15,8 @@ import DatePicker from '../../components/DatePicker';
 import { SensorData } from '../../types/SensorData';
 import ViewShot from "react-native-view-shot";
 import * as Sharing from 'expo-sharing';
+
+
 const { width } = Dimensions.get('window');
 
 const BabyMonitorGraphPage: React.FC = () => {

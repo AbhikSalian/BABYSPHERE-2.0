@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { WellnessTracker } from '../components/MoodPicker';
-import { SleepQuality } from '../components/SleepQuality';
 import { WellnessInsights } from '../components/insights/WellnessInsights';
 import { useWellnessLog } from '../hooks/useWellnessLog';
 import { theme } from '../utils/theme';
-import { WellnessTips } from './tips/WellnessTips';
+import  {WellnessTips}  from './tips/WellnessTips';
 import { WellnessTrends } from './trends/WellnessTrends';
 import { usePreferences } from '../hooks/usePreferences';
 import type { MoodType } from '../types/wellness';
+import { db, auth } from '../config/firebaseConfig';
+import { useIsFocused } from '@react-navigation/native';
+import { getDoc, doc } from 'firebase/firestore';
 
 export default function IntegratedWellnessScreen() {
   const [selectedMood, setSelectedMood] = useState<MoodType>();
@@ -21,14 +23,36 @@ export default function IntegratedWellnessScreen() {
     saveInsightPreferences,
     saveChartPreferences,
   } = usePreferences();
+  const isFocused = useIsFocused();
 
-  const handleSave = async () => {
+  
+  useEffect(() => {
+    if (isFocused) {
+      // Fetch and update mood and sleep quality when the screen is focused
+      // Assuming fetchMoodAndSleep is a function that fetches the latest mood and sleep quality
+      fetchMoodAndSleep();
+    }
+  }, [isFocused]);
+
+  const fetchMoodAndSleep = async () => {
+    // Fetch the latest mood and sleep quality from Firebase
+    if (auth.currentUser) {
+      const userRef = doc(db, 'users', auth.currentUser.uid);
+      const userSnap = await getDoc(userRef);
+      if (userSnap.exists()) {
+        const data = userSnap.data();
+        setSelectedMood(data.parent.mood);
+        setSleepQuality(data.parent.sleepQuality);
+      }
+    }
+  };
+  const handleSaveMoodAndSleep = async () => {
     if (selectedMood) {
       await saveMoodAndSleep(selectedMood, sleepQuality);
-      // Reset form after successful save
-      setSelectedMood(undefined);
-      setSleepQuality(5);
     }
+
+    // Refresh tips after saving mood and sleep quality
+    fetchMoodAndSleep();
   };
 
   return (
@@ -39,7 +63,7 @@ export default function IntegratedWellnessScreen() {
           quality={sleepQuality}
           onMoodSelect={setSelectedMood}
           selectedMood={selectedMood}
-          onSave={handleSave}
+          onSave={handleSaveMoodAndSleep}
           isLoading={isLoading}>
         </WellnessTracker>            
         <WellnessTrends />

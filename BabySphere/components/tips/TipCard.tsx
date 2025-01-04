@@ -1,43 +1,55 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { theme } from '../../utils/theme';
+import * as React from "react";
+import { TouchableOpacity, Text } from "react-native";
+import { StyleSheet } from "react-nativescript";
+import { Tip } from "./types";
 
 interface TipCardProps {
-  title: string;
-  description: string;
-  icon: string;
+    tip: Tip;
+    onSave: (id: string) => void;
 }
 
-export function TipCard({ title, description, icon }: TipCardProps) {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.icon}>{icon}</Text>
-      <Text style={styles.title}>{title}</Text>
-      <Text style={styles.description}>{description}</Text>
-    </View>
-  );
+export function TipCard({ tip, onSave }: TipCardProps) {
+    return (
+        <stackLayout style={styles.card}>
+            <label style={styles.title}>{tip.title}</label>
+            <label style={styles.description}>{tip.description}</label>
+            <TouchableOpacity
+                style={tip.isSaved ? styles.savedButton : styles.saveButton}
+                onPress={() => onSave(tip.id)}
+            >
+                <Text>{tip.isSaved ? "Saved" : "Save for Later"}</Text>
+            </TouchableOpacity>
+        </stackLayout>
+    );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    width: 200,
-    padding: 16,
-    backgroundColor: theme.colors.background,
-    borderRadius: 12,
-    ...theme.shadows.card,
-  },
-  icon: {
-    fontSize: 24,
-    marginBottom: 8,
-  },
-  title: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: theme.colors.text,
-    marginBottom: 4,
-  },
-  description: {
-    fontSize: 14,
-    color: theme.colors.textSecondary,
-  },
+    card: {
+        margin: 8,
+        padding: 16,
+        backgroundColor: "white",
+        borderRadius: 8,
+        elevation: 2,
+    },
+    title: {
+        fontSize: 18,
+        fontWeight: "bold",
+        marginBottom: 8,
+    },
+    description: {
+        fontSize: 14,
+        marginBottom: 12,
+    },
+    saveButton: {
+        backgroundColor: "#4CAF50",
+        color: "white",
+        padding: 8,
+        borderRadius: 4,
+    },
+    savedButton: {
+        backgroundColor: "#888888",
+        color: "white",
+        padding: 8,
+        borderRadius: 4,
+    },
 });
