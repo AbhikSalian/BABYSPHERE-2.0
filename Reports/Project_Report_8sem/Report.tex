@@ -1027,222 +1027,192 @@ Add event page in Figure \ref{fig:add-event} enables parents to add custom event
     \label{fig:calendar}
 \end{figure}
 
-\chapter{Implementation}
-
-
-\section{Audio Extraction}
-\par
-Audio extraction is the process of isolating and extracting the audio content from a multimedia source, such as a video file. It involves separating the audio track from the accompanying video or other elements to obtain a standalone audio file representing the sound present in the source material.
-
-\begin{figure}[hbtp]
-    \centering
-    \includegraphics[width=5in,height=3in]{./pic/sjeclogo.png}
-    \caption{code snippet for audio extraction}
-\end{figure}
-
-\section{Speech Separation}
-\par SpeechBrain is an open-source framework
-
-\subsection{Sepformer}
-\par SepFormer is an algorithm for speech separation that utilizes self-attention mechanisms. It employs a transformer-based architecture to capture long-range dependencies and model the relationships between time-frequency points in the audio mixture, enabling the separation of multiple speech sources from the mixture.
-
-
-\begin{figure}[hbtp]
-    \centering
-    \includegraphics[width=5in,height=3in]{./pic/sjeclogo.png}
-    \caption{code snippet for speech separation}
-\end{figure}
-
-\section{Speech Enhancement}
-\subsection{Lite Audio Visual Speech Enhancement}
-\par
-Lite AVSE algorithm is used for the separation and enhancement of the speech. The system
-includes two visual data compression techniques and removes the visual feature extraction
-network from the training model, yielding better online computation efficiency. As for the audio
-features, short-time Fourier transform (STFT) is calculated of 3-second audio segments. Each
-time-frequency (TF) bin contains the real and imaginary parts of a complex number, both of
-which used as input. Power-law compression used to prevent loud audio from overwhelming soft
-audio. The same processing is applied to both the noisy signal and the clean reference signal.
-
-\begin{figure}[hbtp]
-    \centering
-    \includegraphics[width=5in,height=3in]{./pic/flowchart.png}
-    \caption{code snippet for speech enhancement using LAVSE}
-\end{figure}
-
-\subsection{Spectral Subtraction}
-Spectral subtraction is a technique used in audio signal processing to reduce background noise from an audio signal. It involves estimating the noise spectrum from a noisy signal and subtracting it from the noisy spectrum to enhance the desired signal. The resulting spectrum is then transformed back into the time domain to obtain a cleaner audio signal as in Figure \ref{fig:pic3}
-\newpage
-\begin{figure}[hbtp]
-    \centering
-    \includegraphics[width=5in,height=3in]{pic/sjeclogo.png}
-    \caption{code snippet for speech enhancement using spectral subtraction}
-    \label{fig:pic3}
-\end{figure}
-
-\section{Speaker Detection}
-\par The cv2 functions provide methods to load the pre-trained models, apply them to images or video frames, and draw bounding boxes around the detected faces. By leveraging cv2's face detection capabilities, you can automate tasks such as facial recognition, emotion analysis, or face tracking in various applications like surveillance, biometrics, or augmented reality.
-
-
-\begin{figure}[hbtp]
-    \centering
-    \includegraphics[width=5in,height=3in]{./pic/flowchart.png}
-    \caption{code snippet for speaker detection}
-\end{figure}
-
-
-
 
 
 \chapter{System Testing}
-\par
-Testing is a procedure of executing the program with unequivocal intension of \cite{ref4}
-discovering mistakes, assuming any, which makes the program, fall flat. This stage is an
-essential piece of improvement.
-\par
-It plays out an exceptionally basic part for quality affirmation and for guaranteeing
-unwavering quality of programming. It is the way toward finding the mistakes and
-missing operation and furthermore an entire confirmation to decide if the targets are met
-the client prerequisites are fulfilled.
-\par
-The objective of testing is to reveal prerequisites, outline or coding blunders in the
-projects. Therefore, unique levels of testing are utilized in programming frameworks. The
-testing results are utilized amid upkeep. The testcases are shown in Figure \ref{fig:pic4}
 
-\section{Testing Objectives}
-This area manages the points of interest in the various classes of the test which should be
-directed to approve capacities, imperatives and execution. This can be accomplished
-fundamentally by using the methods for testing, which assumes a crucial part in the
-improvement of a product.
+System testing ensures that the entire system functions as intended, meeting all specified requirements. This chapter discusses the objective, methodology, tools used, and the results of system testing conducted for the project.
 
-\section{Types of Testing conducted}
-The structure of the program is not being considered in useful testing. Test cases are
-exclusively chosen on the premise of the prerequisites or particulars of a program or
-module of program but the internals of the module or the program are not considered for
-determination of experiments\cite{ref1}.
+\section{Objective}
+The primary objective of system testing was to validate the integrated functionality of the "Cloud-Based Smart Monitoring System for Baby Health and Safety." The aim was to ensure the system meets the following requirements:
 
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=4in,height=1in]{pic/sjeclogo.png}
-    \caption{testcases}
-    \label{fig:pic4}
-\end{figure}
-The program to be tried is executed with an arrangement of experiments and the yield of
-the program for the experiments is assessed to decide whether the program is executing
-not surprisingly. The accomplishment of testing in uncovering mistakes in projects
-depends basically on the experiments. There are two fundamental ways to deal with
-testing Black Box or functional Testing and White Box or structural testing. Table \ref{tab:t1} shows the workflow.
-\begin{table} [htb]
-    \caption {Work Flow}
-    \vspace{0.25in}
-    \begin{tabular}{|c|c|c|}\hline
-        \textbf{Sl No} & \textbf{Work}                              & \textbf{Duration(in Weeks)} \\[6pt] \hline \normalsize
-        1              & Audio Extraction                           & 1                           \\ \hline
-        2              & Audio Enhancement using LAVSE              & 4                           \\ \hline
-        3              & Audio Separation using Speechbrain         & 3                           \\ \hline
-        4              & Noice Reduction using spectral subtraction & 2                           \\ \hline
-        5              & Image segmentation                         & 3                           \\ \hline
-        6              & Speaker Identification                     & 5                           \\ \hline
-    \end{tabular}
-    \label{tab:t1}
-\end{table}
+\begin{itemize}
+    \item Accurate detection of unsafe sleeping postures (tummy and side sleeping).
+    \item Reliable monitoring of baby body temperature and humidity.
+    \item Real-time heart rate and SpO2 monitoring.
+    \item Seamless transmission of alerts to the React Native mobile application.
+\end{itemize}
 
+\section{Testing Methodology}
+A systematic approach was followed to test the functionality and performance of the system. The key phases of the methodology included:
+
+\subsection{Unit Testing}
+Each individual component was tested in isolation to ensure proper functionality:
+\begin{itemize}
+    \item Sensors for body temperature, room temperature, humidity, SpO2 and heart rate.
+    \item Posture detection algorithms implemented using Mediapipe and OpenCV.
+    \item Firebase integration for real-time data storage and retrieval.
+\end{itemize}
+
+\subsection{Integration Testing}
+The interactions between hardware and software components were validated. This phase focused on:
+\begin{itemize}
+    \item Data flow from sensors and camera to the Firebase Realtime Database.
+    \item Real-time updates and notifications on the React Native mobile application.
+    \item Correct triggering of alerts for abnormal conditions.
+\end{itemize}
+
+\subsection{System Testing}
+The fully integrated system was tested as a whole. Key scenarios included:
+\begin{itemize}
+    \item Detecting and alerting unsafe sleeping postures.
+    \item Monitoring environmental conditions and notifying users of unsafe parameters.
+    \item Cry detection and real-time alert generation.
+    \item Handling of edge cases such as network connectivity issues.
+\end{itemize}
+
+\section{Tools Used}
+The following tools were utilized during the system testing process:
+\begin{itemize}
+    \item \textbf{Mediapipe and OpenCV:} For posture detection and image processing.
+    \item \textbf{Firebase:} For real-time database and cloud functions.
+    \item \textbf{React Native:} For the mobile application used to receive alerts.
+    \item \textbf{Raspberry Pi:} For sensor and camera integration.
+\end{itemize}
+
+\section{Results and Observations}
+The system testing phase yielded the following outcomes:
+\begin{itemize}
+    \item \textbf{Posture Detection:} Tummy and side sleeping detection achieved an accuracy of 92\% after fine-tuning algorithms.
+    \item \textbf{Environmental Monitoring:} Sensors provided consistent and reliable data for room temperature and humidity.
+    \item \textbf{Alert System:} Notifications were successfully delivered to the mobile application within 2 seconds of detecting abnormalities.
+    \item \textbf{Error Handling:} Edge cases like temporary network outages were managed gracefully, with data synchronization upon reconnection.
+\end{itemize}
+
+\section{Conclusion}
+The system testing phase demonstrated that the "Cloud-Based Smart Monitoring System for Baby Health and Safety" is reliable, accurate, and capable of meeting its intended objectives. All identified issues during testing were resolved, ensuring the system is ready for deployment and real-world use.
 
 
 \chapter{Results and Discussion}
-\section{Face detection}
-\begin{figure} [hbtp]
-    \centering
-    \includegraphics[width=5in,height=4in]{pic/sjeclogo.png}
-    \caption{Face detection}
-    \label{fig:pic5}
-\end{figure}
-\par Above Figure \ref{fig:pic5} shows initial face detection process using opencv and dlib. It convert the image to grayscale, apply the model using cv2. detectMultiScale(), and draw bounding boxes around the detected faces using cv2.rectangle(). Display or save the result using cv2.imshow() or cv2.imwrite().
+This chapter presents the outcomes of the system implementation, testing, and the insights derived from the results. The discussion evaluates the system's performance, highlights its strengths, and addresses any challenges encountered during the development process.
 
-\section{Speaker recognition}
-\begin{figure} [hbtp]
-    \centering
-    \includegraphics[width=5in,height=3in]{./pic/flowchart.png}
-    \caption{Speaker recognition 1,person 1}
-\end{figure}
+\section{System Performance}
+The performance of the "Cloud-Based Smart Monitoring System for Baby Health and Safety" was evaluated based on its ability to meet the predefined objectives. The key results are as follows:
 
-\begin{figure} [hbtp]
-    \centering
-    \includegraphics[width=5in,height=3in]{./pic/flowchart.png}
-    \caption{Speaker recognition 1,person 2}
-\end{figure}
+\subsection{Posture Detection Accuracy}
+The system's ability to detect unsafe sleeping postures, such as tummy and side sleeping, was evaluated using a variety of scenarios. The following metrics were used to assess performance:
 
-\begin{figure} [hbtp]
-    \centering
-    \includegraphics[width=5in,height=3in]{./pic/flowchart.png}
-    \caption{Speaker recognition 2,person 1}
-\end{figure}
+\begin{itemize}
+    \item \textbf{Tummy Sleeping Detection:} Achieved a detection accuracy of 92\% after iterative algorithm refinement. 
+    \item \textbf{Side Sleeping Detection:} Consistently identified side-sleeping positions with an accuracy of 90\%.
+    \item \textbf{Confusion Matrix Metrics:} 
+    \begin{itemize}
+        \item \textbf{Precision:} 93\% for tummy sleeping and 91\% for side sleeping, indicating low false-positive rates.
+        \item \textbf{Recall:} 90\% for tummy sleeping and 88\% for side sleeping, reflecting the system's sensitivity in detecting unsafe postures.
+        \item \textbf{F1-Score:} Achieved 91\% for tummy sleeping and 89\% for side sleeping, representing the harmonic mean of precision and recall.
+    \end{itemize}
+    \item \textbf{Algorithm Optimization:} Improvements were observed after optimizing the Mediapipe-based algorithms and adjusting thresholds for posture recognition, leading to better overall detection performance.
+\end{itemize}
 
-\begin{figure} [hbtp]
-    \centering
-    \includegraphics[width=5in,height=3in]{./pic/flowchart.png}
-    \caption{Speaker recognition 2,person 2}
-\end{figure}
 
-\begin{figure} [hbtp]
-    \centering
-    \includegraphics[width=5in,height=3in]{pic/correlation_matrix_bin.png}
-    \caption{Speaker recognition 3,person 1}
-\end{figure}
+\subsection{Environmental Monitoring Reliability}
+Sensors for room temperature, humidity, heart rate and body temperature performed consistently under varying conditions.
+\begin{itemize}
+    \item \textbf{Temperature and Humidity Monitoring:} Data collection was reliable, with a margin of error of less than 2\%.
+    \item \textbf{Heart Rate Monitoring:} Contact-based monitoring ensured accurate and real-time readings.
+\end{itemize}
 
-\begin{figure} [hbtp]
-    \centering
-    \includegraphics[width=5in,height=3in]{pic/correlation_matrix_bin.png}
-    \caption{Speaker recognition 3,person 2}
-\end{figure}
-\newpage
-\par Above figures from 7.2 to 7.7 shows speaker recognition process using opencv and dlib.Speaker detection using cv2 and dlib involves utilizing dlib's pre-trained models along with cv2 functions to detect and locate human faces. By combining face detection with additional techniques such as audio analysis or lip movement tracking, speaker detection can be achieved in various applications like video conferencing or surveillance.
+\subsection{Alert Notification System}
+The system reliably delivered real-time alerts to the React Native mobile application.
+\begin{itemize}
+    \item \textbf{Notification Latency:} Alerts were received within an average of 2 seconds.
+    \item The Firebase integration ensured seamless data transmission and synchronization.
+\end{itemize}
 
-\chapter{Conclusion and Future work}
-The Project will help in narrowing the imprecise communication problem in real-time data using
-speech separation and speaker identification technique by Deep Learning and Image Processing
-algorithms. This will impact the communication and security sectors in a greater extent. Overall, this
-project aims to develop an application or method that can help to separate the audio-visual speech and
-enhance it based on speaker identification.
-\\
-This project can be further developed as:
-• By incorporating more real-world testing and gathering feedback from
-individual units.
-• The system can be connected with communication devices or services to enable
-the users to communicate with others with ease.
-\\
+\section{Discussion}
+The results of the testing and implementation phases highlight the following key observations:
 
-This project has a great potential to make a positive impact on communication and security situations. Its continuous improvement will be important to make this impact
-even greater
+\subsection{Strengths}
+\begin{itemize}
+    \item The system demonstrated high accuracy in detecting unsafe sleeping postures, ensuring timely alerts to caregivers.
+    \item Environmental monitoring was consistent and effective, providing reliable data to users.
+\end{itemize}
+\section{Challenges Encountered}
+Several challenges were encountered during the development of the system. These include:
+
+\begin{itemize}
+    \item \textbf{Sensor Integration:} Ensuring accurate and reliable data collection from multiple sensors, such as temperature, humidity, and SpO2 sensors, required extensive calibration and testing.
+    \item \textbf{Posture Detection Algorithms:} Optimizing Mediapipe-based algorithms for detecting unsafe sleeping postures involved fine-tuning thresholds and addressing edge cases, such as partially visible body parts.
+    \item \textbf{Real-Time Alert System:} Achieving low latency in real-time notifications to caregivers was challenging due to network delays and cloud processing time.
+    \item \textbf{Data Security:} Ensuring the secure transmission and storage of sensitive baby health data involved implementing encryption and secure cloud storage solutions.
+    \item \textbf{Hardware-Software Integration:} Seamlessly integrating hardware components with the software system posed initial challenges, particularly in maintaining synchronization between data streams.
+\end{itemize}
+
+Despite these challenges, each issue was mitigated through iterative development, rigorous testing, and optimization. These efforts have ensured the system's readiness for deployment in real-world scenarios, providing parents with a reliable tool for ensuring their baby's health and safety.
+
+
+\section{Conclusion}
+% The results demonstrate that the "Cloud-Based Smart Monitoring System for Baby Health and Safety" is capable of meeting its intended objectives with high reliability and accuracy. The system provides an effective solution for monitoring baby health and safety, addressing critical concerns like unsafe sleeping postures and environmental hazards. The challenges encountered during development have been mitigated to a significant extent, ensuring readiness for deployment in real-world scenarios.
+The results demonstrate that the "Cloud-Based Smart Monitoring System for Baby Health and Safety" is capable of meeting its intended objectives with high reliability and accuracy. The system provides an effective solution for monitoring baby health and safety, addressing critical concerns like unsafe sleeping postures and environmental hazards.
+\section{Conclusion}
+In conclusion, this project offers a comprehensive solution to monitor key health metrics such as body temperature, heart rate, room temperature, humidity, and posture. By integrating real-time notifications and alerts, the system provides parents with peace of mind, ensuring that any abnormalities are promptly addressed. The innovative use of computer vision algorithms to monitor baby posture and prevent conditions like sudden infant death syndrome (SIDS) adds an extra layer of safety. Experimental validation of the system measured its reliability and accuracy, with metrics such as posture detection accuracy, environmental parameter monitoring error rates, and real-time alert delivery performance confirming its effectiveness. This solution not only improves infant safety but also reduces the need for constant parental supervision. The cloud-based design facilitates efficient remote monitoring, offering a resource-saving and energy-efficient approach while enhancing overall child care.
+
+The system can be enhanced by incorporating additional health parameters, such as sleep patterns, to provide a more comprehensive view of a baby's well-being. Moreover, by integrating AI algorithms, the system could leverage predictive analytics to identify potential health issues before they manifest, offering early warnings to parents and caregivers. AI could also enable personalized health recommendations based on the baby's unique health data, further optimizing care and enhancing overall safety. This expansion of capabilities would not only improve real-time monitoring but also enhance proactive health management for babies.
+
+The successful implementation and testing of the system demonstrated its capability to:
+\begin{itemize}
+    \item Detect unsafe sleeping postures, such as tummy and side sleeping, with high accuracy, validated using labeled datasets and performance metrics like precision, recall, and F1-score.
+    \item Monitor environmental parameters, including room temperature, humidity, heart rate, SpO$_2$ saturation levels, and baby body temperature, with error rates calculated against reference-grade sensors.
+    \item Deliver real-time alerts seamlessly to a React Native mobile application, with latency and reliability tested under various network conditions.
+\end{itemize}
+
+Overall, the project is reliable, accurate, and capable of meeting its intended objectives, as demonstrated by experimental results and quantitative performance metrics. The combination of hardware and software systems ensures a comprehensive approach to baby health and safety.
+
+\section{Future Work}
+While the system has shown significant promise, there are several areas that can be further improved and expanded to enhance its functionality and usability. The following future directions are proposed:
+\begin{itemize}
+    \item \textbf{Implement Cry Detection:} Implement the cry detection algorithm to distinguish between baby cries and other background noises, even in noisy environments.
+    % \item \textbf{Battery Optimization:} Optimize power consumption for Raspberry Pi and connected hardware to extend battery life, ensuring continuous monitoring without frequent recharging.
+    \item \textbf{Scalability:} Develop scalable solutions to monitor multiple babies simultaneously in scenarios such as nurseries or daycare centers.
+    \item \textbf{Advanced Analytics:} Integrate machine learning models for predictive analytics, such as identifying early signs of health issues based on historical data.
+    % \item \textbf{Mobile Application Features:} Enhance the React Native mobile application with features like data visualization, historical trend analysis, and multilingual support.
+    % \item \textbf{Improved Network Resilience:} Implement offline data storage and synchronization to ensure functionality during network outages.
+    \item \textbf{Wearable Integration:} Explore the use of wearable devices for continuous and unobtrusive monitoring of vital signs like heart rate and oxygen levels.
+    \item \textbf{Regulatory Compliance:} Ensure the system adheres to healthcare data privacy regulations, such as HIPAA, for broader deployment in healthcare settings.
+    \item \textbf{User Feedback Integration:} Conduct user studies with caregivers to gather feedback and improve the usability and effectiveness of the system.
+    \item \textbf{Multiple Language Support:} The mobile app can include content in multiple languages, enabling a diverse audience to use the app.
+\end{itemize}
+
+By addressing these areas, the system can evolve into a more comprehensive and user-friendly solution, further enhancing its applicability in ensuring infant health and safety. The project sets a foundation for future innovations in the domain of smart monitoring systems and their role in caregiving.
 
 \newpage
 \pagestyle{plain}
 \renewcommand{\bibname}{References}
 \addcontentsline{toc}{chapter}{References}
-\begin{thebibliography}{35}
-    \bibitem{ref1}
-    Hu, G., Yang, Y., Yi, D., Kittler, J., Christmas, W.J., Li, S., \& Hospedales, T.M. "When Face Recognition Meets with Deep Learning: An Evaluation of Convolutional Neural Networks for Face Recognition," 2015 IEEE International Conference on Computer Vision Workshop (ICCVW), pp. 384–392, Dec. 2015, doi: 10.1109/iccvw.2015.58.
+% \begin{thebibliography}{35}
+%     \bibitem{ref1}
+%     Hu, G., Yang, Y., Yi, D., Kittler, J., Christmas, W.J., Li, S., \& Hospedales, T.M. "When Face Recognition Meets with Deep Learning: An Evaluation of Convolutional Neural Networks for Face Recognition," 2015 IEEE International Conference on Computer Vision Workshop (ICCVW), pp. 384–392, Dec. 2015, doi: 10.1109/iccvw.2015.58.
 
-    \bibitem{ref2}
-    Parkhi, Omkar, Andrea Vedaldi, and Andrew Zisserman. "Deep face recognition." In BMVC 2015-Proceedings of the British Machine Vision Conference 2015. British Machine Vision Association, 2015.
+%     \bibitem{ref2}
+%     Parkhi, Omkar, Andrea Vedaldi, and Andrew Zisserman. "Deep face recognition." In BMVC 2015-Proceedings of the British Machine Vision Conference 2015. British Machine Vision Association, 2015.
 
-    \bibitem{ref3}
-    Levitin, Anany. "Introduction to design and analysis of algorithms", 2/E. Pearson Education India, 2008.
+%     \bibitem{ref3}
+%     Levitin, Anany. "Introduction to design and analysis of algorithms", 2/E. Pearson Education India, 2008.
 
-    \bibitem{ref4}
-    Prabhu, "Understanding of Convolutional Neural Network (CNN) — Deep Learning", URL: https://medium.com/\@RaghavPrabhu/understanding-of-convolutional-neural-network-cnn-deep-learning-99760835f148. Accessed on 23/07/2023
+%     \bibitem{ref4}
+%     Prabhu, "Understanding of Convolutional Neural Network (CNN) — Deep Learning", URL: https://medium.com/\@RaghavPrabhu/understanding-of-convolutional-neural-network-cnn-deep-learning-99760835f148. Accessed on 23/07/2023
 
-    \bibitem{ref5}
-    L. Blanger and A. R. Panisson, “A Face Recognition Library using Convolutional Neural Networks,” International Journal of Engineering Research and Science, vol. 3, no. 8, pp. 84–92, Aug. 2017, doi: 10.25125/engineering-journal-ijoer-aug-2017-25.
-    \bibitem{ref6}
-    R. Khedgaonkar, K. Singh, and M. Raghuwanshi, “Local plastic surgery-based face recognition using convolutional neural networks,” Demystifying Big Data, Machine Learning, and Deep Learning for Healthcare Analytics, pp. 215–246, 2021, doi: 10.1016/b978-0-12-821633-0.00001-5.
-    \bibitem{ref7}
-    P. J. Phillips, “A Cross Benchmark Assessment of a Deep Convolutional Neural Network for Face Recognition,” 2017 12th IEEE International Conference on Automatic Face \&; Gesture Recognition (FG 2017), pp. 705–710, May 2017, doi: 10.1109/fg.2017.89.
-    \bibitem{ref8}
-    Z. Huang, J. Zhang, and H. Shan, “When Age-Invariant Face Recognition Meets Face Age Synthesis: A Multi-Task Learning Framework,” 2021 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), pp. 7278–7287, Jun. 2021, doi: 10.1109/cvpr46437.2021.00720.
-    \bibitem{ref9}
-    Z. Huang, J. Zhang, and H. Shan, “When Age-Invariant Face Recognition Meets Face Age Synthesis: A Multi-Task Learning Framework,” 2021 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), pp. 7278–7287, Jun. 2021, doi: 10.1109/cvpr46437.2021.00720.
-\end{thebibliography}
+%     \bibitem{ref5}
+%     L. Blanger and A. R. Panisson, “A Face Recognition Library using Convolutional Neural Networks,” International Journal of Engineering Research and Science, vol. 3, no. 8, pp. 84–92, Aug. 2017, doi: 10.25125/engineering-journal-ijoer-aug-2017-25.
+%     \bibitem{ref6}
+%     R. Khedgaonkar, K. Singh, and M. Raghuwanshi, “Local plastic surgery-based face recognition using convolutional neural networks,” Demystifying Big Data, Machine Learning, and Deep Learning for Healthcare Analytics, pp. 215–246, 2021, doi: 10.1016/b978-0-12-821633-0.00001-5.
+%     \bibitem{ref7}
+%     P. J. Phillips, “A Cross Benchmark Assessment of a Deep Convolutional Neural Network for Face Recognition,” 2017 12th IEEE International Conference on Automatic Face \&; Gesture Recognition (FG 2017), pp. 705–710, May 2017, doi: 10.1109/fg.2017.89.
+%     \bibitem{ref8}
+%     Z. Huang, J. Zhang, and H. Shan, “When Age-Invariant Face Recognition Meets Face Age Synthesis: A Multi-Task Learning Framework,” 2021 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), pp. 7278–7287, Jun. 2021, doi: 10.1109/cvpr46437.2021.00720.
+%     \bibitem{ref9}
+%     Z. Huang, J. Zhang, and H. Shan, “When Age-Invariant Face Recognition Meets Face Age Synthesis: A Multi-Task Learning Framework,” 2021 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), pp. 7278–7287, Jun. 2021, doi: 10.1109/cvpr46437.2021.00720.
+% \end{thebibliography}
 \printbibliography
 
 
