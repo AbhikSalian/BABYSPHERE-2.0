@@ -5,7 +5,9 @@
 \usepackage{graphicx}
 \usepackage{array}
 \usepackage{fancyhdr}
+\usepackage{float}
 \usepackage{geometry}
+\usepackage{subcaption}
 \usepackage{ragged2e}
 \usepackage{color}
 \usepackage{pdfpages}
@@ -549,218 +551,481 @@ The project is highly relevant in today's fast-paced world, where parents are of
 \setlength{\parskip}{1em}  % Adds 1em space between paragraphs
 
 
-\begin{table}[h]
+% \begin{table}[h]
+%     \centering
+%     \caption{Comparison of Existing Projects}
+%     \renewcommand{\arraystretch}{1.5}
+%     \resizebox{\textwidth}{!}{
+%         \begin{tabular}{|>{\centering\arraybackslash}p{3.3cm}|>
+%             {\centering\arraybackslash}p{4.5cm}|>{\centering\arraybackslash}p{4.5cm}|>{\centering\arraybackslash}p{4.5cm}|>{\centering\arraybackslash}p{4.5cm}|>{\centering\arraybackslash}p{4.5cm}|}
+
+%             \hline
+
+%             \textbf{Project Title}                                                                                                           & \textbf{Problem Addressed}                                                                                             & \textbf{Methodology}                                                                                                                                                                   & \textbf{Implementation and Results}                                                                                                                     & \textbf{Inference and Results}                                                                                                                                                           & \textbf{Limitation/Future Scope}                                                                                                                                \\
+%             \hline
+%             Mobile Lorm Glove-Introducing a Communication Device for Deaf-Blind People (February 2012)                                       & Communication challenges for deaf-blind individuals                                                                    & Uses fabric pressure sensors, vibrating motors, and a Bluetooth module for communication                                                                                               & Enables mobile communication, simultaneous translation, and one-to-many communication                                                                   & Enhances independence and communication for deaf-blind individuals                                                                                                                       & Thickness of the glove                                                                                                                                          \\
+%             \hline
+%             Tactile Board: A Multimodal Augmentative and Alternative Communication Device for Individuals with Deafblindness (November 2020) & Communication challenges for individuals with deafblindness using a mobile AAC device                                  & Utilizes a 4-by-4 haptic matrix, customizable vocabulary database, and a haptic vest                                                                                                   & Employs Samsung Galaxy Tab S2, Android OS, Google's NLP API, Raspberry Pi, and Python script                                                            & Potential applications include communication with strangers and conveying environmental information.                                                                                     & Future evaluations are envisioned, especially during the COVID-19 pandemic                                                                                      \\
+%             \hline
+%             Multimodal Communication System for People Who Are Deaf or Have Low Vision (January 2002)                                        & Communication challenges for individuals with deafness or low vision                                                   & Involves real-time transformation of verbal messages into visual color patterns                                                                                                        & Uses LEDs with brightness modulation for improved text visualization.                                                                                   & Shows promise for real-time communication for individuals with hearing and vision impairments                                                                                            & Acknowledges limitations of Morse code and proposes a novel light code variant.
+%             \\
+%             \hline
+%             On Improving GlovePi: Towards a Many-to-Many Communication Among Deaf-blind Users (January 2018)                                 & Communication challenges for deaf-blind individuals, emphasizing many-to-many communication                            & Enhanced version of GlovePi with sensors, Raspberry Pi, mobile devices, and a tuple center                                                                                             & Focuses on improving communication capabilities for enhanced social interaction                                                                         & Aims to contribute to the social inclusion and well-being of deaf-blind individuals                                                                                                      & Future work involves integrating output sensors for tactile feedback.                                                                                           \\
+%             \hline
+%             MyVox-Device for the Communication Between People: Blind, Deaf, Deaf-Blind and Unimpaired (October 2014)                         & Developed for individuals who are deaf-blind, addressing their communication challenges                                & Powered by Raspberry Pi, includes USB keyboard, speaker, braille display, vibration motor, and real-time clock                                                                         & Provides customized inputs and outputs for text, speech, and tactile communication                                                                      & Represents an important step in addressing the communication challenges faced by deaf-blind individuals                                                                                  & Future work involves internet access, custom applications, and broader availability                                                                             \\
+%             \hline
+%             HaptiComm: A Touch-Mediated Communication Device for Deafblind Individuals (April 2023)                                          & Communication challenges for Deafblind individuals through touch-mediated communication using electrodynamic actuators & Utilizes an array of electrodynamic actuators to reproduce tactile sensations of fingerspelling, with a focus on canceling magnetic interference and addressing shaking and vibrations & Successfully reproduces three of the five contact types of fingerspelling, participants accurately recognize the type and number of activated actuators & Further investigations are needed to explore its full potential, including refining timing and speed parameters and estimating letter recognition rates compared to human fingerspelling & Acknowledges susceptibility to shaking and vibrations, plans to refine actuation parameters, estimate letter recognition rates, and quantify the learning curve \\
+%             \hline
+%         \end{tabular}
+%     }
+%     \label{tab:gesture-recognition-projects}
+% \end{table}
+
+\begin{table}[H]
     \centering
-    \caption{Comparison of Existing Projects}
-    \renewcommand{\arraystretch}{1.5}
-    \resizebox{\textwidth}{!}{
-        \begin{tabular}{|>{\centering\arraybackslash}p{3.3cm}|>
-            {\centering\arraybackslash}p{4.5cm}|>{\centering\arraybackslash}p{4.5cm}|>{\centering\arraybackslash}p{4.5cm}|>{\centering\arraybackslash}p{4.5cm}|>{\centering\arraybackslash}p{4.5cm}|}
+    \caption{Comparison of Existing Work}
+    \label{tab:comparison}
+    \small
+    \begin{tabular}{|>{\centering\arraybackslash}p{4cm}|>{\centering\arraybackslash}p{2cm}|>{\centering\arraybackslash}p{2.5cm}|>{\centering\arraybackslash}p{3cm}|>{\centering\arraybackslash}p{2.5cm}|}
+      \hline
+      \textbf{Paper Title}                                                                                     & \textbf{Identified Problem}                      & \textbf{Methodology}                                       & \textbf{Key Features}                                             & \textbf{Limitations}                                               \\ \hline
+      \textbf{IoT Based Smart Baby Monitoring System with Emotion Recognition\cite{alam2023iot}}               & Continuous monitoring challenges for parents     & IoT sensors + ML                                           & Emotion detection, notifications                                  & Data security concerns                                             \\ \hline
+      \textbf{IOT Based Baby Monitoring System\cite{Singh2021}}                                                & Need for real-time monitoring                    & NodeMCU + sensors                                          & Automatic cradle swaying                                          & Sensor accuracy issues                                             \\ \hline
+      \textbf{Internet of Things in Pregnancy Care Coordination\cite{Hossain2023}}                             & Gaps in literature on IoT applications           & Systematic review                                          & Comprehensive analysis of existing works                          & Lack of usability studies                                          \\ \hline
+      \textbf{Development of an IoT based Smart Baby Monitoring System with Face Recognition\cite{9454187}}    & Parental anxiety over infant safety              & Face recognition + sensors                                 & Real-time updates on identity \& environment                      & Performance under varying conditions                               \\ \hline
+      \textbf{IOT Based Baby Monitoring System Smart Cradle\cite{9442022}}                                     & Automation needs in baby care                    & Microcontroller + sensors                                  & Automated responses to crying                                     & Limited health tracking features                                   \\ \hline
+      \textbf{Smart Infant Baby Monitoring System Using IoT\cite{Kumar2023}}                                   & High SIDS Rates; Inadequate Monitoring           & Raspberry Pi + Sensors; SMS Notifications                  & Significant reduction in SIDS incidents; High parent satisfaction & Advanced analytics needed; Predictive capabilities                 \\ \hline
+      \textbf{Development of RTOs Based Internet Connected Baby Monitoring System\cite{mishra2018development}} & Lack of Real-Time Data Access                    & Multiple Sensors + Cloud Storage; User-Friendly App Design & Reliable alerts; Enhanced parental engagement reported            & UI enhancements suggested; Additional sensor integrations          \\ \hline
+      \textbf{Smart Caregiving Support Cloud Integration Systems\cite{10578217}}                               & Lack integration between functionalities         & Cloud computing technologies + sensor outputs; Mobile app  & Data from sensors and cloud is aggregated into one interface      & Scalability enhancment suggested                                   \\ \hline 
+      \textbf{Real time infant health monitoring system for hard of hearing parents\cite{aktacs2016real}}      & Lack immediate access to critical health metrics & IoT technologies capture vital signs                       & Effective performance by providing continuous updates             & Suggested exploring integration with healthcare providers’ systems \\ \hline
+    \end{tabular}
+  \end{table}
+  
 
-            \hline
+  \section{Proposed system}
 
-            \textbf{Project Title}                                                                                                           & \textbf{Problem Addressed}                                                                                             & \textbf{Methodology}                                                                                                                                                                   & \textbf{Implementation and Results}                                                                                                                     & \textbf{Inference and Results}                                                                                                                                                           & \textbf{Limitation/Future Scope}                                                                                                                                \\
-            \hline
-            Mobile Lorm Glove-Introducing a Communication Device for Deaf-Blind People (February 2012)                                       & Communication challenges for deaf-blind individuals                                                                    & Uses fabric pressure sensors, vibrating motors, and a Bluetooth module for communication                                                                                               & Enables mobile communication, simultaneous translation, and one-to-many communication                                                                   & Enhances independence and communication for deaf-blind individuals                                                                                                                       & Thickness of the glove                                                                                                                                          \\
-            \hline
-            Tactile Board: A Multimodal Augmentative and Alternative Communication Device for Individuals with Deafblindness (November 2020) & Communication challenges for individuals with deafblindness using a mobile AAC device                                  & Utilizes a 4-by-4 haptic matrix, customizable vocabulary database, and a haptic vest                                                                                                   & Employs Samsung Galaxy Tab S2, Android OS, Google's NLP API, Raspberry Pi, and Python script                                                            & Potential applications include communication with strangers and conveying environmental information.                                                                                     & Future evaluations are envisioned, especially during the COVID-19 pandemic                                                                                      \\
-            \hline
-            Multimodal Communication System for People Who Are Deaf or Have Low Vision (January 2002)                                        & Communication challenges for individuals with deafness or low vision                                                   & Involves real-time transformation of verbal messages into visual color patterns                                                                                                        & Uses LEDs with brightness modulation for improved text visualization.                                                                                   & Shows promise for real-time communication for individuals with hearing and vision impairments                                                                                            & Acknowledges limitations of Morse code and proposes a novel light code variant.
-            \\
-            \hline
-            On Improving GlovePi: Towards a Many-to-Many Communication Among Deaf-blind Users (January 2018)                                 & Communication challenges for deaf-blind individuals, emphasizing many-to-many communication                            & Enhanced version of GlovePi with sensors, Raspberry Pi, mobile devices, and a tuple center                                                                                             & Focuses on improving communication capabilities for enhanced social interaction                                                                         & Aims to contribute to the social inclusion and well-being of deaf-blind individuals                                                                                                      & Future work involves integrating output sensors for tactile feedback.                                                                                           \\
-            \hline
-            MyVox-Device for the Communication Between People: Blind, Deaf, Deaf-Blind and Unimpaired (October 2014)                         & Developed for individuals who are deaf-blind, addressing their communication challenges                                & Powered by Raspberry Pi, includes USB keyboard, speaker, braille display, vibration motor, and real-time clock                                                                         & Provides customized inputs and outputs for text, speech, and tactile communication                                                                      & Represents an important step in addressing the communication challenges faced by deaf-blind individuals                                                                                  & Future work involves internet access, custom applications, and broader availability                                                                             \\
-            \hline
-            HaptiComm: A Touch-Mediated Communication Device for Deafblind Individuals (April 2023)                                          & Communication challenges for Deafblind individuals through touch-mediated communication using electrodynamic actuators & Utilizes an array of electrodynamic actuators to reproduce tactile sensations of fingerspelling, with a focus on canceling magnetic interference and addressing shaking and vibrations & Successfully reproduces three of the five contact types of fingerspelling, participants accurately recognize the type and number of activated actuators & Further investigations are needed to explore its full potential, including refining timing and speed parameters and estimating letter recognition rates compared to human fingerspelling & Acknowledges susceptibility to shaking and vibrations, plans to refine actuation parameters, estimate letter recognition rates, and quantify the learning curve \\
-            \hline
-        \end{tabular}
-    }
-    \label{tab:gesture-recognition-projects}
-\end{table}
-
-
-
-\par
+  The Cloud-Based Smart Monitoring System for Baby Health and Safety is designed to ensure the well-being of infants through real-time monitoring of critical health parameters and environmental conditions. It integrates various IoT sensors to measure the baby's body temperature, room temperature, humidity, heart rate, and blood oxygen saturation (SpO2). A camera captures live video feeds, enabling the detection of unsafe sleeping positions using advanced computer vision algorithms. The system is powered by a Raspberry Pi, which collects and processes data, transmitting it to a cloud infrastructure for storage and analysis. A mobile application serves as the user interface, providing parents with real-time access to health data and alerts.
+  
+  The system offers numerous benefits, including enhanced safety through continuous monitoring and immediate alerts for potential health issues, which can be crucial for preventing incidents such as Sudden Infant Death Syndrome (SIDS). Its intuitive mobile application ensures easy access to vital information, allowing parents to monitor their baby’s health from anywhere. Additionally, the cloud-based architecture facilitates scalability for future enhancements. Overall, this proposed system significantly advances the intersection of technology and infant care, promoting a safer and more responsive environment for parents and their babies.
+  
+  \subsection{Importance of chosen project}
+  The chosen project addresses a critical need for continuous monitoring of infants, a task that is particularly challenging for parents, especially when they are away from home. Infants are vulnerable to health risks that can arise unexpectedly, making it essential for caregivers to have reliable systems in place to monitor their well-being. By integrating various health sensors, video feeds, and cloud-based real-time analysis, the system ensures that parents are immediately alerted to potential health risks. This proactive approach to monitoring can help prevent life-threatening conditions such as Sudden Infant Death Syndrome (SIDS) and other critical health issues, ultimately providing parents with much-needed peace of mind. The project's significance is underscored by the growing demand for technology that can support busy families in maintaining the safety and health of their infants.
+  \subsection{Novelty in Proposed project}
+  The novelty of the proposed project lies in its comprehensive integration of multiple health parameters—such as body temperature, heart rate, SpO2, humidity, and more—with video-based posture detection. This data is processed in real-time using advanced cloud technology. Unlike most existing systems, which tend to focus on isolated health metrics or lack the functionality for real-time monitoring, this system offers a unified platform that simultaneously tracks various aspects of a baby’s health. The use of machine learning algorithms for video analysis further distinguishes this project, as it allows for automatic detection of unsafe sleeping positions. This combination of features provides a more holistic approach to infant monitoring that is not commonly found in current market solutions.
+  \subsection{Advancement of State-of-the-Art}
+  The project advances the state-of-the-art by merging health monitoring with video-based posture analysis through the application of artificial intelligence techniques. Current solutions typically operate in silos, either relying solely on health sensors or focusing on video surveillance without integrating the two. This system’s multi-faceted approach ensures comprehensive monitoring, as it not only tracks vital health parameters but also observes the baby’s physical position. Additionally, leveraging cloud technology allows for scalable and remote access to the monitoring data, making the system more robust and future-proof. By employing cutting-edge technologies, this project aims to set new standards in the realm of infant health monitoring.
+  
+  \subsection{Differentiation from Existing Works}
+  This project differentiates itself from existing works that focus solely on either wearable sensors or video-based monitoring by integrating both components into a single, cohesive system. This comprehensive approach makes it more effective in providing thorough monitoring of infants. The incorporation of deep learning techniques for posture detection, combined with real-time alerts, sets this system apart from those that rely merely on sensor-based monitoring. Furthermore, the use of a cloud infrastructure ensures seamless access to data from remote locations, allowing busy parents to stay informed about their baby’s health at all times. This combination of features not only enhances the practicality of the system but also addresses the evolving needs of modern families.
+  
+% \par
 
 %---------------------------- Chapter THREE --------------------------
 
 \chapter{Software Requirements Specification}
-\section{Functional requirements}
-\textbf{Speech-to-Text Conversion:}\\
-Integrate robust speech recognition tools or APIs, such as Google Cloud Speech-to-Text or Python's SpeechRecognition library. Capture and transcribe spoken words into written text. Ensure high accuracy in speech-to-text conversion to facilitate precise communication.
 
-\noindent\textbf{Text-to-Braille Conversion:}\\
-Develop a sophisticated algorithm capable of translating transcribed text into Braille characters. Support different Braille standards and languages. Efficiency to minimize processing time for text-to-Braille conversion.
+\section{Functional Requirements}
 
-\noindent\textbf{Braille Hardware Integration:}\\
-Integrate with Braille hardware systems i.e. device containing the sensor and actuators. Enable real-time sensory updates for seamless interaction.
+\subsection{User Management}
+\begin{itemize}
+  \item Users will have the ability to create an account using email and password authentication. Account management features will include options to update personal information, reset passwords, and delete accounts.
+  \item The application must implement secure login and logout procedures to protect user data, including multi-factor authentication for added security.
+\end{itemize}
 
-\noindent\textbf{User Interface Development:}\\
-Design an intuitive user interface for easy interaction.
-Facilitate smooth communication between the application and Braille hardware.
+\subsection{Data Monitoring}
+\begin{itemize}
+  \item The system will continuously fetch and display real-time data for baby parameters such as body temperature, room temperature, humidity, heart rate, and SpO2 levels through the integration of various IoT sensors.
+  \item Users will have access to live video feeds from a camera connected to the Raspberry Pi, allowing them to visually monitor their baby at all times.
+\end{itemize}
 
-\noindent\textbf{Hardware Interaction:}\\
-Develop a system that interfaces seamlessly with the chosen Braille hardware.
-Ensure the application can send Braille characters to the hardware for physical representation.
+\subsection{Alerts and Notifications}
+\begin{itemize}
+  \item The system will monitor predefined thresholds for all critical parameters, and users will receive immediate notifications (via push notifications or SMS) if any parameter, such as temperature or heart rate, exceeds safe levels.
+  \item Utilizing computer vision algorithms, the system will analyze the baby’s posture and send alerts if it detects unsafe sleeping positions, particularly if the baby is at risk of sleeping on their tummy.
+\end{itemize}
 
-\section{Non-Functional requirements}
-\textbf{Security Measures:}\\
-Implement robust security protocols to ensure user data privacy and secure communication.
+\subsection{Historical Data Access}
+\begin{itemize}
+  \item The application will allow users to access historical data and trends for all monitored parameters over selectable time periods. Users can view graphs and statistics to understand trends in their baby's health.
+  \item Users will have the capability to export their data in various formats (e.g., CSV, PDF) for personal records or sharing with healthcare professionals.
+\end{itemize}
 
-\noindent\textbf{Usability Testing:}\\
-Conduct extensive usability testing with deaf-blind users to evaluate system functionality. Gather feedback for continual improvement.
+\section{Non-Functional Requirements}
 
-\noindent\textbf{Accessibility Standards Compliance:}\\
-Ensure compliance with accessibility standards to cater to the specific needs of the deaf-blind community. Test and enhance the application's compatibility with different screen reader software.
+\subsection{Usability}
+\begin{itemize}
+  \item The application must be designed with a user-friendly interface, ensuring that even non-technical users can navigate easily. Help sections should be readily available for guidance.
+  \item The application should be usable even by parents with limited digital literacy.
+\end{itemize}
 
-\noindent\textbf{Language and Braille Standards Support:}\\
-Support Braille standards to enhance versatility and stay updated with the latest Braille standards and ensure compatibility
+\subsection{Reliability}
+\begin{itemize}
+  \item The system should provide 99.9\% uptime to ensure continuous monitoring, especially during critical periods when parents are not home.
+  \item Implement data backup strategies to prevent loss of critical monitoring data and ensure that the system can recover from failures seamlessly.
+\end{itemize}
 
-\section{User Interface Designs}
-\textbf{Intuitive Design:}\\
-\qquad Simple Navigation:
-Design a straightforward navigation system that is easy for deaf-blind users to comprehend. Utilize clear and concise menu structures to facilitate intuitive interaction.
+\subsection{Security}
+\begin{itemize}
+  % \item All sensitive user data must be encrypted during transmission and storage to protect against unauthorized access.
+  \item Implement secure authentication protocols (e.g., OAuth2) to safeguard user accounts and personal information.
+\end{itemize}
 
-\noindent\textbf{Accessibility Features:}\\
-Tactile Feedback Options:
-Integrate tactile feedback options within the user interface to enhance the user experience for deaf-blind individuals. Provide customizable settings for feedback intensity and type.
+\subsection{Scalability}
+\begin{itemize}
+  \item The system architecture must support scalability, enabling it to handle an increasing number of users and devices without compromising performance.
+  \item Utilize cloud services that can easily scale resources such as multiple user handling and catering multiple devices at the same time based on demand.
+\end{itemize}
 
-\noindent\textbf{Design specifications:}\\
-Maintain a consistent design language across the website and application to provide a unified user experience. Design the website to be responsive across different devices, ensuring accessibility on desktops, tablets, and smartphones.
+\section{User Interface Design}
 
+\subsection{Layout}
+\begin{itemize}
+  \item The main dashboard will present an overview of the baby's current health metrics, including temperature, heart rate, and other relevant data, and it should be easy to interpret, with clear visual indicators.
+  \item Users should be able to navigate effortlessly between different sections of the application, such as historical data views, alert logs, and settings.
+\end{itemize}
 
-\section{Hardware and Software requirements}
-\subsection{Hardware Requirements:}
+\subsection{Color Scheme and Branding}
+\begin{itemize}
+  \item The application should use a soothing color palette (e.g., soft blues and greens) to create a calming atmosphere for users, promoting comfort and ease.
+  \item All branding elements, including logos and fonts, should be consistently applied throughout the app to enhance brand recognition.
+\end{itemize}
 
-\textbf{Sensors for Braille Input:}\\
-Deploy sensors capable of detecting Braille characters either through touch or proximity sensors. Ensure the sensors are responsive to user input for a seamless interaction experience.
+\subsection{Accessibility}
+\begin{itemize}
+  \item The design should ensure that users with disabilities can easily navigate the app, incorporating features such as screen reader compatibility and adjustable text sizes.
+\end{itemize}
 
-\noindent\textbf{Actuators for Tactile Feedback:}\\
-Integrate actuators to provide tactile feedback corresponding to the Braille characters displayed. Design the actuators to deliver precise and distinguishable tactile sensations for each Braille character.
+\section{Hardware \& Software Requirements}
 
-\noindent\textbf{Braille Symbol Actuator/Sensor:}\\
-Employ a hardware system as the primary hardware interface. Ensure the device can dynamically represent different Braille characters based on user inputs and can sense.
+\subsection{Hardware Requirements}
+\begin{itemize}
+  \item A Raspberry Pi (minimum Model 3B) will be used for processing video feeds and interfacing with IoT sensors, with a compatible camera module for video input.
+  \item The system will include multiple sensors such as temperature sensors (e.g., DHT22), humidity sensors, heart rate sensors (e.g., MAX30100), and SpO2 sensors.
+  \item A Raspberry Pi camera module will be utilized for live monitoring.
+\end{itemize}
 
-\subsection{Software Requirements:}
+\subsection{Software Requirements}
+\begin{itemize}
+  \item The system will run on Raspbian or any compatible Linux-based OS for the Raspberry Pi to support necessary libraries and applications.
+  \item React Native will be used for mobile app development, allowing cross-platform functionality for both Android and iOS\cite{reactnativeIntroductionReact}.
+  \item Firebase by Google Cloud Platform will serve as the cloud service backend for real-time data storage and user authentication, providing scalability and ease of integration\cite{googleCloudComputing}\cite{googleFirebaseDocumentation}. 
+  \item OpenCV will be utilized for computer vision tasks, specifically for detecting unsafe baby sleeping positions, and MQTT will be used as the messaging protocol to facilitate communication between the Raspberry Pi and the cloud\cite{10187295}\cite{9292052}.
+\end{itemize}
 
-\textbf{Speech-to-Text Conversion Software:}\\
-Utilize reliable speech recognition tools such as APIs, PyAudio, SpeechRecognition, and librosa by Python library for accurate conversion of spoken words into written text. Select a technology stack that supports real-time speech-to-text conversion.
+\section{Performance Requirements}
 
-\noindent\textbf{Text-to-Braille Conversion Algorithm:}\\
-Develop a robust algorithm for translating the transcribed text into Braille characters using Python. Ensure the algorithm supports various Braille standards and languages.
+\subsection{Response Time}
+\begin{itemize}
+  \item The application should provide real-time updates for health metrics with a maximum latency of 2 seconds to ensure timely alerts and monitoring.
+  \item Live video feeds should load within 3 seconds to provide parents with immediate visual access to their baby.
+\end{itemize}
 
-\noindent\textbf{Braille to Hardware Translation Software:}\\
-Implement software to translate the Braille characters into signals that can be understood by the hardware. Developing a communication protocol using a hardware device that can be used by sensing for seamless interaction between the software and hardware components.
-
-\noindent\textbf{Website or Application:}\\
-Create a user-friendly website or application interface for text-based communication. Include features for speech-to-text conversion, text-to-Braille conversion, and seamless interaction with the hardware.
-
-\noindent\textbf{Operating System Compatibility:}\\
-Ensure compatibility with major operating systems, such as Android and iOS, for mobile applications. For websites, ensure compatibility across different web browsers.
-
-\noindent\textbf{Integration with ROS (Robot Operating System):}\\
-Implement the necessary software components to integrate with ROS. Ensure smooth communication between different software modules.
-
-
-\section{Performance Requirements }
-\textbf{Real-time Speech-to-Text Conversion:}\\
-Achieve near-instantaneous speech-to-text conversion. Evaluate system response time for spoken words to text. Ensure real-time transcription for effective communication.
-
-\noindent\textbf{Efficient Text-to-Braille Translation:}\\
-Swift translation of text to Braille characters. Assess the speed of the text-to-Braille conversion algorithm. Minimize delays in Braille representation.
-
-\noindent\textbf{Seamless Hardware Interaction:}\\
-Establish real-time communication with Braille hardware. Monitor time for Braille characters to be transmitted and displayed. Achieve responsive updates on the Braille hardware.
-
-\noindent\textbf{Scalability:}\\
-Ensure optimal performance with increased user interactions. Evaluate system performance under varying loads. Maintain optimal performance with a growing user base and data load.
-
-\noindent\textbf{Resource Utilization:}\\
-Optimize resource usage for efficient operation. Assess CPU, memory, and network utilization. Ensure resource-efficient operation on diverse devices.
-
-\noindent\textbf{Error Handling:}\\
-Implement effective error-handling mechanisms. Evaluate the system's ability to manage errors. Gracefully handle errors to minimize disruption.
-
-\noindent\textbf{Usability Testing:}\\
-Conduct usability testing based on user feedback. Gather feedback on system responsiveness and ease of use. Regular testing and iterative improvements for user satisfaction.
-
+\subsection{Data Processing}
+\begin{itemize}
+  \item The system should continuously process and analyze health data to ensure timely alerts and notifications, maintaining performance even with multiple concurrent users.
+\end{itemize}
 
 \section{Design Constraints}
-\textbf{Portability:}\\
-The system must be designed for portability, considering use across different devices. Optimize the user interface and functionalities for seamless operation on various platforms, including mobile devices and desktop computers.
 
-\noindent\textbf{Device Compatibility:}\\
-Ensure compatibility with a variety of devices commonly used by the deaf-blind community. Design the system to adapt to different screen sizes, resolutions, and hardware configurations for widespread accessibility.
+\subsection{Technical Constraints}
+\begin{itemize}
+  \item The system must operate within the processing capabilities and memory limits of the selected hardware (Raspberry Pi).
+  \item Must ensure that data storage and processing comply with relevant data protection regulations, such as GDPR or HIPAA, depending on the target market.
+\end{itemize}
 
-\noindent\textbf{Real-time Communication:}\\
-Address the need for real-time communication between the application and hardware. Optimize data transmission and processing to minimize latency, providing users with immediate updates on the Braille hardware.
-
-\noindent\textbf{Usability for Deaf-Blind Users:}\\
-Prioritize usability for individuals with dual sensory impairments. Conduct usability testing with the deaf-blind community, incorporating their feedback to optimize the system's accessibility and ease of use.
+\subsection{Environmental Constraints}
+\begin{itemize}
+  \item The system must function effectively in varying home environments, considering factors like Wi-Fi signal strength, which could impact data transmission and monitoring capabilities.
+\end{itemize}
 
 \section{Other Requirements}
-\textbf{Long-term Support Plans:}\\
-Develop strategies for long-term system support and updates. Establish a framework for ongoing maintenance, addressing evolving technological standards and user needs.
 
-\noindent\textbf{Training Programs:}\\
-Provide comprehensive training programs for users, educators, and support staff. Design training materials and sessions to ensure effective usage and support, promoting accessibility and user empowerment.
+\subsection{Compliance Requirements}
+\begin{itemize}
+  \item The system must comply with health and safety regulations applicable to baby monitoring devices, ensuring that all hardware components are safe for use around infants.
+\end{itemize}
+
+\subsection{Documentation}
+\begin{itemize}
+  \item Comprehensive user manuals must be provided to assist users in setting up and using the monitoring system effectively.
+  \item Detailed technical documentation should be created for future maintenance and potential upgrades, outlining system architecture and component specifications.
+\end{itemize}
 
 
 \chapter{System Design}
-paragraph contents...
-\section{Architecture Design}
-\begin{figure}[hbtp]
-    \centering
-    \includegraphics[width=4in,height=3in]{./pic/sjeclogo.png}
-    \label{fig:pic1}
-    \caption{System Architecture Diagram}
+This chapter outlines the system design for the Cloud-Based Smart Monitoring System for Baby Health and Safety, detailing the system's architecture, functionality, control flow, access layers, and user interface design. Each section includes design diagrams, descriptions, and an explanation of how they apply to the project.
+\section{Abstract Design}
+
+\subsection{Architectural diagram}
+
+The architectural diagram in Figure \ref{fig:architecture} outlines the Cloud-Based Smart Monitoring System for Baby Health and Safety, showcasing how various components interact to provide a comprehensive baby monitoring solution.
+\begin{enumerate}
+\item \textbf{User Interaction and Mobile Interface:} The user initiates the monitoring process by accessing the mobile application interface, which includes a live camera feed. The user can request the recording of the baby’s health metrics, which initiates data collection from multiple sensors and a real-time video feed. This interface also displays alerts and processed information regarding the baby’s health.
+\item \textbf{Sensing System:} The sensing system consists of multiple sensors, including Heart rate sensor, Baby temperature sensor, SpO2 (oxygen saturation) sensor, Humidity sensor, Camera sensor.
+
+These sensors collect real-time data from the baby’s physical environment, covering both health metrics and environmental factors. This raw data is then sent to the Processor for initial handling.
+
+\item \textbf{Processor (Raspberry Pi):} Acting as an intermediary, the Raspberry Pi receives the data from the sensors and forwards relevant data to the \textbf{ML Model (Posture Detector)} to analyze the baby’s sleeping posture. The processor handles the computational load and ensures efficient data processing before sending responses back to the mobile interface. If unsafe postures or abnormal metrics are detected, an alert is generated.
+
+\item \textbf{ML Model and Database (Firebase):} The ML model, hosted externally as a pre-trained model, plays a crucial role in posture detection. Once the Raspberry Pi sends the data to the ML model, it processes the data and generates a response. Additionally, all data is stored and managed within a \textbf{Firebase} database, which securely holds historical health metrics and retrieves information as required by the user. Firebase also triggers alerts and notifications based on the ML model’s responses and alerts from the sensor data.
+
+\item \textbf{Alerts and Notifications:} The system is designed to provide timely alerts. When abnormal readings or unsafe sleeping postures are detected, the mobile app immediately notifies the user, allowing them to take quick action. The database and ML model work together to process and extract data, ensuring that alerts are accurate and meaningful.
+
+\item \textbf{Summary:} This architecture ensures seamless data flow from sensing, processing, and alerting to final user interaction. This integrated approach enhances baby monitoring, helping caregivers make informed decisions to ensure the baby's safety and well-being.
+\end{enumerate}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.55]{./pic/finarch.png}
+  \caption{Architectural Diagram showing the interaction of various entities of the baby monitoring system.}
+  \label{fig:architecture}
 \end{figure}
-This Figure \ref{fig:pic1} illustrates a high-level overview of the audio visual speech separation system. It is important to note that the specific techniques, algorithms, and models used in each component can vary depending on the implementation approach and the requirements of the system.
-\section{Decomposition Description}
+\subsection{Use Case Diagram}
+
+This use case diagram in \ref{fig:usecase} outlines the product designed to monitor a baby’s health and safety through interactions with a \textbf{User (Caregiver)}, a \textbf{Sensing System}, and a \textbf{Medical Practitioner}.
+
+\begin{enumerate}
+    \item \textbf{User:} The User can view a live camera feed and request the recording of health metrics, which are stored in the database. If any unsafe conditions (like risky postures) are detected, the system sends alerts to the User for immediate action.
+    
+    \item \textbf{Sensing System:} The Sensing System collects health data (e.g., posture) and sends it to the monitoring system. The system processes this data to detect potential safety risks, triggering alerts when necessary.
+    
+    \item \textbf{Medical Practitioner:} The Medical Practitioner reviews health metrics stored in the system and provides insights or recommendations, which the system relays to the User to support safe caregiving.
+\end{enumerate}
+
+Overall, the system combines real-time monitoring, data storage, and expert feedback to ensure the baby’s health and safety effectively.
+
 \begin{figure}[hbtp]
-    \centering
-    \includegraphics[width=5in,height=3in]{./pic/sjeclogo.png}
-    \caption{Flow chart}
-    \label{fig:pic2}
+  \centering
+  \includegraphics[scale=0.8]{./pic/Use case.png}
+  \caption{Use Case Diagram showing the interaction between users and the system.}
+  \label{fig:usecase}
+\end{figure}
+\section{Functional Design}
+\subsection{Sequence diagram}
+
+The sequence diagram shown in Figure \ref{fig:sequence} illustrates the workflow of a Cloud-Based Smart Monitoring System for Baby Health and Safety. Here’s a breakdown of the interactions among various components in the system:
+
+\textbf{User Interaction:} The user begins by opening the mobile application. This app is designed to fetch real-time data regarding the baby’s health and environmental factors, helping to monitor the baby’s well-being effectively.
+
+\textbf{Mobile Application Requests:} Upon initialization, the mobile application communicates with the Sensing System to retrieve various health parameters. These include the baby’s heartbeat, humidity levels, body and room temperature, SpO2 (oxygen saturation), and a live video feed.
+
+\textbf{Sensing System Data Collection:} The sensing system gathers these metrics from the physical environment where the baby is located. It captures vital data such as heart rate, humidity, body and room temperature, and oxygen levels, along with the live video feed. This data is sent for processing.
+
+\textbf{Data Processing by ML Model:} The data collected is then passed to the Machine Learning (ML) Model for analysis. The ML model processes the data to identify any potential risks, such as unsafe sleeping positions or abnormal readings that may indicate health concerns.
+
+\textbf{Data Storage:} The processed data, including any alerts or historical records, is stored in a Database. This storage enables the system to maintain a log of health metrics over time, allowing caregivers to review past records and track trends.
+
+\textbf{Alerts and Notifications:} If the ML model detects unsafe sleeping positions or abnormal values in the sensed parameters, it triggers an alert. This alert is sent back to the mobile application to notify the user, ensuring immediate awareness of any potential risks to the baby’s health.
+
+\textbf{Viewing Results:} Finally, the user can view real-time data and historical readings from within the mobile app. This user-friendly interface provides caregivers with comprehensive insight into the baby’s health, allowing for timely intervention if needed.
+
+\begin{figure}[hbtp]
+  \centering
+  \includegraphics[scale=0.27]{./pic/seq.png}
+  \caption{Sequence diagram showing the timeline of interaction between different entities in the system}
+  \label{fig:sequence}
+\end{figure}
+
+% \section{Access Layer Design}
+% \subsection{Data Flow Diagram}
+% The data flow diagram shown in Figure \ref{fig:dataflow} outlines how data travels through the system, highlighting the interaction between sensors, the Raspberry Pi, cloud storage, and the mobile application.
+% \begin{itemize}
+%   \item \textbf{Sensors:} The first layer involves IoT sensors collecting real-time data on the baby’s health and environmental conditions.
+%   \item \textbf{Raspberry Pi:} The Raspberry Pi acts as a bridge, processing sensor data and relaying it to the cloud.
+%   \item \textbf{Cloud Database:} In the cloud, data is securely stored and processed. The system continuously checks the data against preset safety thresholds and sends alerts when abnormalities are detected.
+%   \item \textbf{Mobile Application:} The app fetches data from the cloud and displays it to the user in real-time. Parents can also retrieve historical data for deeper insights into the baby’s health trends.
+% \end{itemize}
+% \begin{figure}[hbtp]
+%   \centering
+%   \includegraphics[scale=0.35]{./pic/WhatsApp Image 2024-10-23 at 22.00.55_66baa9c8.jpg}
+%   \caption{Data flow diagram showing how the data travels through the system}
+%   \label{fig:dataflow}
+% \end{figure}
+
+\section{Presentation Layer Design}
+\subsection{User Interface Flow Design}
+The user interface flow for the application (Figure \ref{fig:uiflow}) is designed to provide parents with an intuitive and seamless experience for monitoring their baby's health and environment. The following steps describe the flow from the onboarding process to the profile management:
+\begin{enumerate}
+  \item \textbf{Onboarding Screen:} Upon launching the app, the user is welcomed with the onboarding screen, which introduces the app’s primary function, ensuring peace of mind for every parent by offering baby health monitoring in the palm of their hand. This screen includes an image carousel showcasing key features like monitoring baby movements, temperature, humidity, and more. The user is prompted to continue with email to proceed further.
+  \item \textbf{Sign-Up Screen:} New users are taken to the Sign-Up screen after the onboarding. Here, they can create an account by providing a username, email, and password. A simple and user-friendly form guides the registration process. After filling in the details, they can tap Sign Up. If they already have an account, they are given the option to switch to the login screen.
+  \item \textbf{Login Screen:} Existing users access the Login screen, where they can sign in by entering their email and password. There’s also a Forgot password option for those who might need help recovering their credentials. After entering valid credentials, the user taps Log In to access the app’s features.
+  \item \textbf{Home Screen:} After logging in, the user is taken to the Home screen. This screen displays key baby health data, including real-time temperature tracking, humidity levels and SpO2 levels.
+  \item \textbf{Stats Screen:} The Stats screen gives a detailed view of the baby’s health trends over time. 
+  \item \textbf{Profile Screen:} The Profile screen offers personalized features for the user. They can call a doctor directly from the app if any issues are detected, access emergency contacts quickly for immediate assistance, modify details such as contact information, health preferences, and other personal settings to ensure the app is tailored to their needs.
+\end{enumerate}
+\begin{figure}[hbtp]
+  \centering
+  \includegraphics[scale=0.32]{./pic/uiflow.png}
+  \caption{User Interface Flow Design of the mobile app designed using Figma}
+  \label{fig:uiflow}
 \end{figure}
 \newpage
-Figure \ref{fig:pic2} represent the flow chart of the proposed system. In audio visual speech separation, the goal is to decompose an audio signal containing multiple overlapping speakers into individual speech signals corresponding to each speaker. The decomposition process involves separating the desired speech signals from the background noise and other interfering sounds.
+\chapter{Implementation}
+The implementation phase of the project "Cloud-Based Smart Monitoring System for Baby Health and Safety" was executed in a systematic manner, incorporating both hardware and software components. Below is a detailed explanation of the steps and methodologies adopted during this phase.
 
-\section{Data Flow Design}
-\par
-The audio input undergoes pre-processing, while the visual input is processed to extract relevant cues. The pre-processed audio and processed visual data are then integrated. From the integrated representation, features are extracted. These features are utilized in the speech separation stage, where individual speech signals are separated from the mixture. Post-processing techniques are applied to enhance the quality of the separated speech signals. Finally, the individual speech signals are outputted as the result of the system. The data flow design ensures a sequential flow of operations, starting from capturing and processing the inputs, integrating the audio-visual information, extracting features, performing speech separation, applying post-processing, and generating the output. This design allows for effective processing and separation of audio visual data to obtain distinct speech signals from overlapping speakers.
-\\
-\begin{figure}[hbtp]
+\section{System Architecture Design}
+The system architecture was designed to ensure seamless integration of hardware and software components, focusing on real-time data processing and user-friendly interfaces. The architecture consisted of:
+\begin{itemize}
+  \item \textbf{Hardware Module:}
+   \begin{itemize}
+    \item Sensors for baby body temperature, room temperature, humidity, and heart rate.
+    \item A camera module integrated with Raspberry Pi for video streaming and posture detection.
+  \end{itemize}
+  \item \textbf{Software Module:}
+  \begin{itemize}
+    \item A React Native mobile application for parent notifications.
+    \item Firebase for real-time data storage and cloud integration.
+    \item Computer vision algorithms for unsafe posture detection using Mediapipe and OpenCV.
+  \end{itemize}
+\end{itemize}
+The architecture ensured data flow from the hardware module to the software application, with alerts generated based on predefined thresholds.
+\section{Hardware Implementation}
+The hardware implementation involved integrating various sensors and a camera module to collect real-time data from the baby's environment.
+\begin{itemize}
+  \item \textbf{Sensors:}
+  \begin{itemize}
+    \item MLX90614 IR Temperature sensor was used to monitor the body temperature of the baby.
+    \item MAX30102 heart rate ans SpO2 sensor was employed for continuous monitoring of the baby’s health.
+    \item Data from these sensors were sent to a microcontroller unit for preprocessing.
+  \end{itemize}
+  \item \textbf{Camera Module:}
+  \begin{itemize}
+    \item A Raspberry Pi camera was used to capture live video for posture analysis.
+    \item The video feed was sent to Render server through a websocket connection and was processed for unsafe posture detection using Mediapipe library in Python.
+  \end{itemize}
+  \item \textbf{Connectivity:}
+  \begin{itemize}
+    \item The Raspberry Pi was configured to send the processed data to Firebase over a Wi-Fi connection.
+  \end{itemize}
+\end{itemize}
+\subsection{CAD representation of the hardware setup}
+Shown in Figure \ref{fig:hardware} is the 3D pictorial representation of the hardware setup which consists of Raspberry Pi, power adaptor and all the sensors along with the camera.
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=1]{./pic/hardware.png}
+  \caption{CAD Model of the hardware setup designed using Autodesk Inventor}
+  \label{fig:hardware}
+\end{figure}
+\section{Software Implementation}
+The software implementation focused on developing the front-end application, backend integration, and computer vision-based posture detection.
+\begin{itemize}
+  \item \textbf{Mobile Application Development:}
+   \begin{itemize}
+    \item Built using React Native for cross-platform compatibility.
+    \item Features included real-time alerts for abnormal conditions (e.g., fever, unsafe sleeping postures).
+    \item Integrated Firebase to fetch live data from the hardware module and display it on the user interface.
+  \end{itemize}
+  \item \textbf{Backend Integration:}
+  \begin{itemize}
+    \item Firebase Realtime Database was configured for data storage and retrieval.
+    \item Cloud Functions in Firebase were used to process and trigger alerts based on predefined thresholds.
+  \end{itemize}
+  \item \textbf{Posture Detection Algorithm:}
+  \begin{itemize}
+    \item Implemented using Mediapipe and OpenCV.
+    \item Analyzed the baby's posture by detecting key landmarks (e.g., shoulders, eyes, nose).
+    \item Algorithms to identify tummy-sleeping and side-sleeping positions were fine-tuned based on testing data.
+  \end{itemize}
+\end{itemize}
+\section{Screenshots of the mobile app}
+
+\subsection{Sign Up and Sign In Pages}
+The Sign Up page (Figure \ref{fig:sign-up}) allows new users to create an account by entering their details, while the Sign In page (Figure \ref{fig:sign-in}) authenticates existing users using their email and password.
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[b]{0.22\textwidth}
     \centering
-    \includegraphics[width=4in,height=2in]{./pic/flowchart.png}
-    \caption{Dataflow design}
+    \includegraphics[width=\textwidth]{./pic/sign-up.jpeg}
+    \caption{Sign Up page}
+    \label{fig:sign-up}
+\end{subfigure}
+% \hfill
+  \hspace{0.1\textwidth}
+  \begin{subfigure}[b]{0.22\textwidth} % Adjust width
+      \centering
+      \includegraphics[width=\textwidth]{./pic/sign-in.jpeg}
+      \caption{Sign In page}
+      \label{fig:sign-in}
+  \end{subfigure}
+  
+  
+  \caption{Sign Up and Sign In pages of the baby monitoring app for user registration and user authentication.}
+    \label{fig:auth-pages}
+\end{figure}
+\subsection{Dashboard (Live Vitals)}
+The dashboard given in Figure \ref{fig:dashboard} provides a real-time display of the baby's vital signs, including body temperature, heart rate, SpO2, and humidity. 
+% It serves as the central hub for live monitoring, ensuring parents have instant access to critical health data.
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[b]{0.22\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./pic/dashboard.jpeg}
+    \caption{Dashboard - Light theme}
+    \label{fig:dashboard-light}
+\end{subfigure}
+% \hfill
+  \hspace{0.1\textwidth}
+  \begin{subfigure}[b]{0.22\textwidth} % Adjust width
+      \centering
+      \includegraphics[width=\textwidth]{./pic/dark-mode.jpeg}
+      \caption{Dashboard - Dark theme}
+      \label{fig:dashboard-dark}
+  \end{subfigure}
+  
+  
+  \caption{Comprehensive real-time display of vital health parameters.}
+    \label{fig:dashboard}
+\end{figure}
+\subsection{Graph Page (Vitals History)}
+Figure \ref{fig:graph} visualizes the historical fluctuations in the baby’s vitals through interactive graphs. Parents can track trends over time to identify patterns or anomalies in the baby's health.
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.1]{./pic/graphs.jpeg}
+  \caption{Graph page for detailed visualization of historical health data trends.}
+  \label{fig:graph}
+\end{figure}
+\subsection{Live-feed Page}
+The live-feed page in Figure \ref{fig:live-feed} streams video from the camera in real time, allowing parents to monitor the baby's movements and posture. This feature helps ensure the baby's safety by detecting abnormal sleeping positions or other concerns.
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.15]{./pic/live-feed.jpeg}
+  \caption{Live-feed page for seamless live video monitoring for enhanced baby safety.}
+  \label{fig:live-feed}
+\end{figure}
+\subsection{Profile Page}
+Figure \ref{fig:profile} contains personal information about the user and the baby. It includes details like the baby’s name, date of birth, and other relevant data, offering a personalized experience.
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.2]{./pic/profile.jpeg}
+  \caption{Profile page for consolidated user and baby information at a glance.}
+  \label{fig:profile}
 \end{figure}
 
-
-
-\newpage
-\section{Use case Diagram}
-use cases represent the main functionalities and tasks involved in the audio visual speech separation system. Each use case contributes to the overall process of capturing, processing, integrating, separating, and post-processing the audio and visual data to achieve the desired outcome of individual speech signal separation.
-\begin{description}
-    \item [Pre-process Audio:] This use case involves pre-processing the captured audio data. It may include operations like filtering, noise reduction, and echo cancellation to improve the quality of the audio signals.
-
-    \item [Process Visual:] This use case involves processing the captured visual data. It includes tasks such as face detection, facial landmark tracking, or lip motion analysis to extract relevant visual cues associated with speech production.
-
-    \item [Integrate Audio-Visual:] This use case represents the integration of the pre-processed audio data and processed visual data to create a synchronized audio-visual representation, aligning the audio and visual streams.
-
-    \item [Extract Features:] This use case involves extracting relevant features from the integrated audio-visual representation. It may include computing spectrograms, MFCCs, facial landmarks, or other visual and audio features.
-
-    \item [Perform Speech Separation:] This use case focuses on the actual speech separation process. It utilizes the extracted audio and visual features to separate the individual speech signals from the mixture, using techniques such as blind source separation or deep learning-based models.
-
-\end{description}
-
-\begin{figure}[hbtp]
+\subsection{Calendar}
+The calendar page (Figure \ref{fig:calendar}) allows parents to log and view important dates such as vaccination schedules, doctor appointments, or milestones. It serves as a central planner for managing the baby’s care routine.
+Add event page in Figure \ref{fig:add-event} enables parents to add custom events to the calendar, such as reminders for medical check-ups, birthdays, or specific tasks. It helps streamline the baby’s schedule efficiently.
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[b]{0.24\textwidth}
     \centering
-    \includegraphics[width=9in,height=5in]{./pic/flowchart.png}
-    \caption{Use case diagram for customer}
+    \includegraphics[width=\textwidth]{./pic/calendar.jpeg}
+    \caption{Calendar}
+    \label{fig:cal}
+\end{subfigure}
+% \hfill
+  \hspace{0.1\textwidth}
+  \begin{subfigure}[b]{0.23\textwidth} % Adjust width
+      \centering
+      \includegraphics[width=\textwidth]{./pic/add-event.jpeg}
+      \caption{Adding events to calendar}
+      \label{fig:add-event}
+  \end{subfigure}
+  
+  
+  \caption{Calendar for efficient management of critical dates and events.}
+    \label{fig:calendar}
 \end{figure}
-
 
 \chapter{Implementation}
 
