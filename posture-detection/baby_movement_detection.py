@@ -58,7 +58,7 @@ while True:
 
         # Check for unsafe sleeping patterns
         if is_tummy_sleeping(results.pose_landmarks):
-            cv2.putText(frame, 'Alert: Baby is sleeping on tummy!', (50, 50), 
+            cv2.putText(frame, 'Alert: Baby is sleeping on side!', (50, 50), 
                         cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2, cv2.LINE_AA)
         
         # Check for side-sleeping position

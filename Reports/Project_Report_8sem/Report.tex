@@ -411,7 +411,7 @@ The project is highly relevant in today's fast-paced world, where parents are of
 \setlength{\parskip}{1em}  % Adds 1em space between paragraphs
 
 
-\section{IOT Based Baby Monitoring System Smart Cradle}
+\section{IoT Based Baby Monitoring System Smart Cradle}
 \textbf{Identified Problem: }This paper addresses the need for automated solutions in baby care, particularly for parents who cannot be physically present at all times\cite{9442022}.
 
 \setlength{\parskip}{1em}  % Adds 1em space between paragraphs
@@ -759,6 +759,12 @@ This chapter outlines the system design for the Cloud-Based Smart Monitoring Sys
 \subsection{Architectural diagram}
 
 The architectural diagram in Figure \ref{fig:architecture} outlines the Cloud-Based Smart Monitoring System for Baby Health and Safety, showcasing how various components interact to provide a comprehensive baby monitoring solution.
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=0.55]{./pic/finarch.png}
+  \caption{Architectural Diagram showing the interaction of various entities of the baby monitoring system.}
+  \label{fig:architecture}
+\end{figure}
 \begin{enumerate}
 \item \textbf{User Interaction and Mobile Interface:} The user initiates the monitoring process by accessing the mobile application interface, which includes a live camera feed. The user can request the recording of the baby’s health metrics, which initiates data collection from multiple sensors and a real-time video feed. This interface also displays alerts and processed information regarding the baby’s health.
 \item \textbf{Sensing System:} The sensing system consists of multiple sensors, including Heart rate sensor, Baby temperature sensor, SpO2 (oxygen saturation) sensor, Humidity sensor, Camera sensor.
@@ -774,12 +780,7 @@ These sensors collect real-time data from the baby’s physical environment, cov
 \item \textbf{Summary:} This architecture ensures seamless data flow from sensing, processing, and alerting to final user interaction. This integrated approach enhances baby monitoring, helping caregivers make informed decisions to ensure the baby's safety and well-being.
 \end{enumerate}
 
-\begin{figure}[H]
-  \centering
-  \includegraphics[scale=0.55]{./pic/finarch.png}
-  \caption{Architectural Diagram showing the interaction of various entities of the baby monitoring system.}
-  \label{fig:architecture}
-\end{figure}
+
 \subsection{Use Case Diagram}
 
 This use case diagram in \ref{fig:usecase} outlines the product designed to monitor a baby’s health and safety through interactions with a \textbf{User (Caregiver)}, a \textbf{Sensing System}, and a \textbf{Medical Practitioner}.
@@ -796,7 +797,7 @@ Overall, the system combines real-time monitoring, data storage, and expert feed
 
 \begin{figure}[hbtp]
   \centering
-  \includegraphics[scale=0.8]{./pic/Use case.png}
+  \includegraphics[scale=0.9]{./pic/Use case.png}
   \caption{Use Case Diagram showing the interaction between users and the system.}
   \label{fig:usecase}
 \end{figure}
@@ -923,15 +924,23 @@ The software implementation focused on developing the front-end application, bac
   \item \textbf{Posture Detection Algorithm:}
   \begin{itemize}
     \item Implemented using Mediapipe and OpenCV.
+    \item Mediapipe is a library used to detect and track human body landmarks in real-time. Pose landmarks detectable by mediapipe is given in Figure \ref{fig:pose-landmarks}
     \item Analyzed the baby's posture by detecting key landmarks (e.g., shoulders, eyes, nose).
-    \item Algorithms to identify tummy-sleeping and side-sleeping positions were fine-tuned based on testing data.
+    \item Whether the baby is sleeping in an unsafe position (side sleeping) is determined my mapping the baby's eyes, nose and shoulder landmarks.
+    \item If the eye landmarks are near to coincide with each other, or if the shoulder width decreases below the threshold, the system detects that the baby is slepping on the side, and triggers an alert, as given in Figure \ref{fig:posture}.
   \end{itemize}
+  \begin{figure}[htbp]
+    \centering
+    \includegraphics[scale=0.3]{./pic/pose_landmarks_index.png}
+    \caption{Pose landmarks of the human body that can be detected by Mediapipe}
+    \label{fig:pose-landmarks}
+  \end{figure}
 \end{itemize}
 \section{Screenshots of the mobile app}
 
 \subsection{Sign Up and Sign In Pages}
 The Sign Up page (Figure \ref{fig:sign-up}) allows new users to create an account by entering their details, while the Sign In page (Figure \ref{fig:sign-in}) authenticates existing users using their email and password.
-\begin{figure}[H]
+\begin{figure}[htbp]
   \centering
   \begin{subfigure}[b]{0.22\textwidth}
     \centering
@@ -956,7 +965,7 @@ The Sign Up page (Figure \ref{fig:sign-up}) allows new users to create an accoun
 The dashboard given in Figure \ref{fig:dashboard} provides a real-time display of the baby's vital signs, including body temperature, heart rate, SpO2, and humidity. 
 % It serves as the central hub for live monitoring, ensuring parents have instant access to critical health data.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
   \centering
   \begin{subfigure}[b]{0.22\textwidth}
     \centering
@@ -979,7 +988,7 @@ The dashboard given in Figure \ref{fig:dashboard} provides a real-time display o
 \end{figure}
 \subsection{Graph Page (Vitals History)}
 Figure \ref{fig:graph} visualizes the historical fluctuations in the baby’s vitals through interactive graphs. Parents can track trends over time to identify patterns or anomalies in the baby's health.
-\begin{figure}[H]
+\begin{figure}[htbp]
   \centering
   \includegraphics[scale=0.1]{./pic/graphs.jpeg}
   \caption{Graph page for detailed visualization of historical health data trends.}
@@ -987,7 +996,7 @@ Figure \ref{fig:graph} visualizes the historical fluctuations in the baby’s vi
 \end{figure}
 \subsection{Live-feed Page}
 The live-feed page in Figure \ref{fig:live-feed} streams video from the camera in real time, allowing parents to monitor the baby's movements and posture. This feature helps ensure the baby's safety by detecting abnormal sleeping positions or other concerns.
-\begin{figure}[H]
+\begin{figure}[htbp]
   \centering
   \includegraphics[scale=0.15]{./pic/live-feed.jpeg}
   \caption{Live-feed page for seamless live video monitoring for enhanced baby safety.}
@@ -995,7 +1004,7 @@ The live-feed page in Figure \ref{fig:live-feed} streams video from the camera i
 \end{figure}
 \subsection{Profile Page}
 Figure \ref{fig:profile} contains personal information about the user and the baby. It includes details like the baby’s name, date of birth, and other relevant data, offering a personalized experience.
-\begin{figure}[H]
+\begin{figure}[htbp]
   \centering
   \includegraphics[scale=0.2]{./pic/profile.jpeg}
   \caption{Profile page for consolidated user and baby information at a glance.}
@@ -1100,25 +1109,46 @@ This chapter presents the outcomes of the system implementation, testing, and th
 The performance of the "Cloud-Based Smart Monitoring System for Baby Health and Safety" was evaluated based on its ability to meet the predefined objectives. The key results are as follows:
 
 \subsection{Posture Detection Accuracy}
-The system's ability to detect unsafe sleeping postures, such as tummy and side sleeping, was evaluated using a variety of scenarios. The following metrics were used to assess performance:
+The system's ability to detect unsafe sleeping posture, such as side sleeping, was evaluated using a variety of scenarios. The following metrics were used to assess performance:
 
 \begin{itemize}
-    \item \textbf{Tummy Sleeping Detection:} Achieved a detection accuracy of 92\% after iterative algorithm refinement. 
-    \item \textbf{Side Sleeping Detection:} Consistently identified side-sleeping positions with an accuracy of 90\%.
+    % \item \textbf{Tummy Sleeping Detection:} Achieved a detection accuracy of 92\% after iterative algorithm refinement. 
+    \item \textbf{Side Sleeping Detection:} Consistently identified side-sleeping positions with an accuracy of 90\%, which successfully detected 9 out of 10 times.
     \item \textbf{Confusion Matrix Metrics:} 
-    \begin{itemize}
-        \item \textbf{Precision:} 93\% for tummy sleeping and 91\% for side sleeping, indicating low false-positive rates.
-        \item \textbf{Recall:} 90\% for tummy sleeping and 88\% for side sleeping, reflecting the system's sensitivity in detecting unsafe postures.
-        \item \textbf{F1-Score:} Achieved 91\% for tummy sleeping and 89\% for side sleeping, representing the harmonic mean of precision and recall.
-    \end{itemize}
-    \item \textbf{Algorithm Optimization:} Improvements were observed after optimizing the Mediapipe-based algorithms and adjusting thresholds for posture recognition, leading to better overall detection performance.
+    Showed precision of  90\%, indicating low false-positive rates.
+    % \begin{itemize}
+    %     \item \textbf{Precision:} 90\%, indicating low false-positive rates.
+    %     \item \textbf{Recall:} 90\% for tummy sleeping and 88\% for side sleeping, reflecting the system's sensitivity in detecting unsafe postures.
+    %     \item \textbf{F1-Score:} Achieved 91\% for tummy sleeping and 89\% for side sleeping, representing the harmonic mean of precision and recall.
+    % \end{itemize}
+    \item \textbf{Algorithm Optimization:} Improvements were observed after optimizing the Mediapipe-based algorithms and adjusting thresholds for posture recognition, leading to better overall detection performance. The working of the posture detection algorithm is shown in Figure \ref{fig:posture}.
 \end{itemize}
-
+\begin{figure}[htbp]
+  \centering
+  \begin{subfigure}[b]{0.3\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./pic/posture-normal.png}
+    \caption{Baby is sleeping normally, facing the camera}
+    \label{fig:posture-normal}
+\end{subfigure}
+% \hfill
+  \hspace{0.1\textwidth}
+  \begin{subfigure}[b]{0.3\textwidth} % Adjust width
+      \centering
+      \includegraphics[width=\textwidth]{./pic/posture-side.png}
+      \caption{Baby is sleeping on the side, triggering an alert}
+      \label{fig:posture-side}
+  \end{subfigure}
+  
+  
+  \caption{Working of the posture detection algorithm.}
+    \label{fig:posture}
+\end{figure}
 
 \subsection{Environmental Monitoring Reliability}
 Sensors for room temperature, humidity, heart rate and body temperature performed consistently under varying conditions.
 \begin{itemize}
-    \item \textbf{Temperature and Humidity Monitoring:} Data collection was reliable, with a margin of error of less than 2\%.
+    \item \textbf{Temperature and Humidity Monitoring:} Data collection was reliable, with a margin of error of less than 2\%, which gave accurate readings compared to reference-grade sensors 16 out of 20 times
     \item \textbf{Heart Rate Monitoring:} Contact-based monitoring ensured accurate and real-time readings.
 \end{itemize}
 
@@ -1154,6 +1184,7 @@ Despite these challenges, each issue was mitigated through iterative development
 \section{Conclusion}
 % The results demonstrate that the "Cloud-Based Smart Monitoring System for Baby Health and Safety" is capable of meeting its intended objectives with high reliability and accuracy. The system provides an effective solution for monitoring baby health and safety, addressing critical concerns like unsafe sleeping postures and environmental hazards. The challenges encountered during development have been mitigated to a significant extent, ensuring readiness for deployment in real-world scenarios.
 The results demonstrate that the "Cloud-Based Smart Monitoring System for Baby Health and Safety" is capable of meeting its intended objectives with high reliability and accuracy. The system provides an effective solution for monitoring baby health and safety, addressing critical concerns like unsafe sleeping postures and environmental hazards.
+\chapter{Conclusion and Future Work}
 \section{Conclusion}
 In conclusion, this project offers a comprehensive solution to monitor key health metrics such as body temperature, heart rate, room temperature, humidity, and posture. By integrating real-time notifications and alerts, the system provides parents with peace of mind, ensuring that any abnormalities are promptly addressed. The innovative use of computer vision algorithms to monitor baby posture and prevent conditions like sudden infant death syndrome (SIDS) adds an extra layer of safety. Experimental validation of the system measured its reliability and accuracy, with metrics such as posture detection accuracy, environmental parameter monitoring error rates, and real-time alert delivery performance confirming its effectiveness. This solution not only improves infant safety but also reduces the need for constant parental supervision. The cloud-based design facilitates efficient remote monitoring, offering a resource-saving and energy-efficient approach while enhancing overall child care.
 
