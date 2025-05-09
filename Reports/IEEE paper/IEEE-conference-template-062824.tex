@@ -2,7 +2,7 @@
 \IEEEoverridecommandlockouts
 % The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
 %Template version as of 6/27/2024
-
+\usepackage{float}
 \usepackage{cite}
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{algorithmic}
@@ -166,6 +166,12 @@ These sensors collect real-time data from the baby’s physical environment, cov
 \subsubsection{Use Case Diagram}
 
 Fig. \ref{fig:usecase} outlines the product designed to monitor a baby’s health and safety through interactions with a \textbf{User (Caregiver)}, a \textbf{Sensing System}, and a \textbf{Medical Practitioner}.
+\begin{figure}[hbtp]
+  \centering
+  \includegraphics[scale=0.5]{./pic/Use case.png}
+  \caption{Use Case Diagram showing the interaction between users and the system.}
+  \label{fig:usecase}
+\end{figure}
 
 \textbf{User:} The User can view a live camera feed and request the recording of health metrics, which are stored in the database. If any unsafe conditions (like risky postures) are detected, the system sends alerts to the User for immediate action.
     
@@ -176,12 +182,7 @@ Fig. \ref{fig:usecase} outlines the product designed to monitor a baby’s healt
 
 Overall, the system combines real-time monitoring, data storage, and expert feedback to ensure the baby’s health and safety effectively.
 
-\begin{figure}[hbtp]
-  \centering
-  \includegraphics[scale=0.5]{./pic/Use case.png}
-  \caption{Use Case Diagram showing the interaction between users and the system.}
-  \label{fig:usecase}
-\end{figure}
+
 \subsection{Functional Design}
 \subsubsection*{Sequence diagram}
 
@@ -201,7 +202,7 @@ Fig. \ref{fig:sequence} illustrates the workflow of a Cloud-Based Smart Monitori
 
 \textbf{Viewing Results:} Finally, the user can view real-time data and historical readings from within the mobile app. This user-friendly interface provides caregivers with comprehensive insight into the baby’s health, allowing for timely intervention if needed.
 
-\begin{figure}[hbtp]
+\begin{figure}[H]
   \centering
   \includegraphics[scale=0.15]{./pic/seq.png}
   \caption{Sequence diagram showing the timeline of interaction between different entities in the system}
